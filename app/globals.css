@@ -25,6 +25,13 @@
   background: url("../public/parallax-bg.png.png") no-repeat;
   background-size: cover;
 }
+/* hover catelog */
+.card-catelog__img:hover .card-catelog__imgOverlay {
+  transform: translateY(0);
+  opacity: 1;
+  z-index: 2;
+}
+
 /* hover Product */
 .card-product__img {
   position: relative;

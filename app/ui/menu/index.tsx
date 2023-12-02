@@ -26,8 +26,8 @@ const items: MenuItem[] = [
       "/shop/shop-category"
     ),
     getItem(
-      <Link href="/shop/shop-detail">Shop Detail</Link>,
-      "/shop/shop-detail"
+      <Link href="/shop/product-details">Product Details</Link>,
+      "/shop/product-details"
     ),
   ]),
   getItem("Blog", "/#blog", "", [

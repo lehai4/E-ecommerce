@@ -11,6 +11,7 @@ const nextConfig = {
       "images.pexels.com",
       "preview.colorlib.com",
       "websitedemos.net",
+      "luba.de",
     ],
   },
 };

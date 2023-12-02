@@ -1,5 +1,6 @@
 import { TypeBannerLink } from "@/interface";
 import { PhoneFilled, MailOutlined } from "@ant-design/icons";
+
 export const newsBlog = [
   {
     id: 0,

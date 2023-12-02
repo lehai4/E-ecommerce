@@ -1,16 +1,18 @@
 import Section from "@/app/components/section";
-import CatelogView from "@/app/ui/catelog/catelogView";
 import Intro from "@/app/ui/intro";
+import News from "@/app/ui/news";
 import Subscribe from "@/app/ui/subscribe";
+import { getProducts } from "@/lib/utils/getSliceProduct";
+import { randomProduct } from "@/lib/utils/randomProduct";
 import { Image } from "antd";
 import { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { getAllCategory, getAllProduct } from "../api/product/route";
 import ProductView from "../product/product-view/page";
 import BannerOffer from "../ui/bannerOffer";
-import { getProducts } from "@/lib/utils/getSliceProduct";
-import { randomProduct } from "@/lib/utils/randomProduct";
-import News from "../ui/news";
+import CatelogBanner from "../ui/catelog";
+import { CatesSkeleton } from "../ui/skeleton";
 export const metadata: Metadata = {
   title: {
     template: "%s | Ecommerce",
@@ -64,10 +66,12 @@ export default async function Page() {
           </div>
         </div>
       </Section>
-      <Section className="section-catelog">
-        <CatelogView />
+      <Section className="section-catelog mt-[0px] xl:mb-[120px] lg:mb-[70px]">
+        <Suspense fallback={<CatesSkeleton />}>
+          <CatelogBanner />
+        </Suspense>
       </Section>
-      <Section className="section-title mt-[120px] ">
+      <Section className="section-title mt-[120px]">
         <Intro
           intro="Trending"
           introItalic="Product"

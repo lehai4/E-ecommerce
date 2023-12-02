@@ -38,4 +38,5 @@ interface TypeProduct {
 interface TypeCategory {
   _id: string;
   catelog: string;
+  image: string;
 }
