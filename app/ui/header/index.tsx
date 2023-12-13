@@ -2,11 +2,11 @@
 import { SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { Button, List, Popover, Space } from "antd";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import AndyLogo from "../logo";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
 
 export const Header = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession();
@@ -26,7 +26,7 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
   }, []);
   return (
     <header className="relative w-full h-[89px] z-40">
-      <div className="h-full w-full shadow-md">
+      <div className="h-full w-full shadow-sm">
         <div className="px-[14px] h-full container">
           <div className="h-full flex flex-row items-center justify-between">
             <AndyLogo css={"text-black"} />
@@ -128,7 +128,7 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
                         ? session?.user?.image
                         : "/default_user.png"
                     }`}
-                    className="rounded-full relative h-3/6 w-6/12"
+                    className="rounded-full relative h-3/6 w-6/12 "
                     width={50}
                     height={50}
                     alt="Picture of the user"

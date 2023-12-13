@@ -1,5 +1,6 @@
 "use client";
 import { TypeCategory, TypeProduct } from "@/interface";
+import { convertPathname } from "@/lib/utils/convertPathname";
 import {
   HeartOutlined,
   SearchOutlined,
@@ -58,17 +59,21 @@ const ProductView = ({
             </div>
             <div className="card-body p-[20px]">
               <div className="flex flex-col justify-center items-center">
-                {category.map((cate) => {
+                {category.map((cate, i) => {
                   if (cate._id === product.categoryID) {
                     return (
-                      <span key={cate._id} className="text-[15px] font-normal">
+                      <span key={i} className="text-[15px] font-normal">
                         {cate.catelog}
                       </span>
                     );
                   }
                 })}
                 <span className="card-product__title lg:mb-[8px] text-[20px] font-[500] tracking-tighter">
-                  <Link href={`/product/product-view/${product.name}`}>
+                  <Link
+                    href={`/product/product-view/${convertPathname(
+                      product.name
+                    )}`}
+                  >
                     {product.name}
                   </Link>
                 </span>

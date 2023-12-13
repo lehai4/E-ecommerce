@@ -29,14 +29,30 @@ interface TypeBannerLink {
 interface TypeProduct {
   _id: ObjectId;
   name: string;
-  categoryID: string;
+  categoryID: ObjectId;
   des: string;
   image: string;
   price: number;
   quantity: number;
+  specification: Specification;
+}
+interface Specification {
+  Width: string;
+  Height: string;
+  Depth: string;
+  Weight: string;
 }
 interface TypeCategory {
-  _id: string;
+  _id: ObjectId;
   catelog: string;
   image: string;
+}
+interface TypeReview {
+  _id: ObjectId;
+  productID: ObjectId;
+  name: string;
+  email: string;
+  image: string;
+  rating: string;
+  message: string;
 }

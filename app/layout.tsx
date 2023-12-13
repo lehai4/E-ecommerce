@@ -21,7 +21,9 @@ export default function RootLayout({
       <body className={oswald.className}>
         <Provider>
           <Header>
-            <MenuPage />
+            <Suspense fallback={<Loading />}>
+              <MenuPage />
+            </Suspense>
           </Header>
           <Content>
             <Suspense fallback={<Loading />}>{children}</Suspense>

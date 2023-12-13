@@ -23,7 +23,6 @@ export const metadata: Metadata = {
 export default async function Page() {
   const product = await JSON.parse(JSON.stringify(await getAllProduct()));
   const category = await JSON.parse(JSON.stringify(await getAllCategory()));
-
   return (
     <main className="site-main">
       <Section

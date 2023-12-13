@@ -1,6 +1,11 @@
 import { TypeBannerLink } from "@/interface";
 import { PhoneFilled, MailOutlined } from "@ant-design/icons";
 
+type CommentTab = {
+  id: number;
+  title: string;
+  content?: string | any;
+};
 export const newsBlog = [
   {
     id: 0,
@@ -109,5 +114,23 @@ export const footerBannerAddress = [
     des: "free@infoexample.com",
     desExtra: "www.infoexample.com",
     icon: <MailOutlined />,
+  },
+];
+export const commentTab: CommentTab[] = [
+  {
+    id: 0,
+    title: "Description",
+  },
+  {
+    id: 1,
+    title: "Specification",
+  },
+  {
+    id: 2,
+    title: "Comments",
+  },
+  {
+    id: 3,
+    title: "Reviews",
   },
 ];

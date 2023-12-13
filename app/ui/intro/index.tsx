@@ -14,9 +14,13 @@ const Intro = ({
     <div className="container">
       <div className="intro pb-[60px]">
         <p className="text-[16px] opacity-90 mb-[3px]">{des}</p>
-        <h2 className={`text-[36px] font-[700] leading-[39px]`}>
+        <h2
+          className={`text-[36px] font-[700] leading-[39px] tracking-tighter`}
+        >
           {intro}
-          <Typography.Text className={`text-[36px] font-[700] relative`}>
+          <Typography.Text
+            className={`text-[36px] font-[700] relative tracking-tighter`}
+          >
             &nbsp;
             {introItalic}
             <span className="absolute h-[2px] w-full bg-blue-500 -bottom-2 left-0" />
