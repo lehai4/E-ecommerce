@@ -1,5 +1,6 @@
 "use client";
 
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { TypeCategory, TypeProduct, TypeReview } from "@/interface";
 import { convertPathname } from "@/lib/utils/convertPathname";
 import { getReviewMore } from "@/lib/utils/getSliceProduct";
@@ -13,6 +14,7 @@ import {
   Form,
   Image,
   Input,
+  InputNumber,
   List,
   Rate,
   Segmented,
@@ -26,6 +28,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
+import { AddToCart } from "@/redux/slice/cartSlice";
 
 type FieldType = {
   name?: string;
@@ -42,12 +45,16 @@ const ProductDetail = ({
   category: TypeCategory[];
   reviews: TypeReview[];
 }) => {
-  const { data: session } = useSession();
   const router = useRouter();
+  const dispatcher = useAppDispatch();
+  const { data: session } = useSession();
+
+  const [form] = Form.useForm();
   const [current, setCurrent] = useState<SegmentedValue | string>(
     "Description"
   );
   const [toggle, setToggle] = useState<boolean>(true);
+  const [quantity, setQuantity] = useState<number | null>(1);
 
   const handleReview = async (values: FieldType) => {
     let data = {
@@ -81,13 +88,25 @@ const ProductDetail = ({
     } catch (e) {
       console.log(e);
     }
+    //reset Form after review successfully!
+    form.resetFields();
   };
-
+  const onChange = (value: number | null) => {
+    setQuantity(value);
+  };
+  const handleAddToCart = () => {
+    let customProduct = {
+      ...product,
+      quantity: quantity ?? 1,
+    };
+    dispatcher(AddToCart(customProduct));
+  };
   // convert ObjectKey for Specification
   const objectKeys = Object.keys(product.specification);
 
-  //
+  //limitedReiview
   const limitedRevieve = toggle ? getReviewMore(3, reviews) : reviews;
+
   // overallReview
   const overallReview = useCallback(() => {
     return reviews.reduce((acc, current) => {
@@ -104,8 +123,8 @@ const ProductDetail = ({
           alt={product.name}
           preview={false}
         />
-        <div className="px-[15px] xl:ml-[95px]">
-          <div className="mt-[65px] -ml-[15px]">
+        <div className="px-[15px] xl:ml-[95px] lg:ml-[90px]">
+          <div className="mt-[65px] xl:-ml-[15px] lg:-ml-[15px]">
             <h3 className="text-[24px] font-[600] mb-[5px] tracking-tighter">
               {product.name}
             </h3>
@@ -165,15 +184,18 @@ const ProductDetail = ({
               className="items-center w-full"
             >
               <Typography.Text>Quantity:</Typography.Text>
-              <Input
+              <InputNumber
                 size="middle"
-                defaultValue="1"
-                type="number"
+                width="250"
                 min={1}
                 max={10}
-                width="250"
+                defaultValue={1}
+                onChange={onChange}
               />
-              <button className="rounded-full border border-blue-600 text-base px-[25px] md:px-[30px] lg:px-[42px] py-[8px] md:py-[12px] lg:py-[12px] bg-blue-600 text-white hover:text-blue-600 hover:bg-white duration-300 ease-in">
+              <button
+                className="rounded-full border border-blue-600 text-base px-[25px] md:px-[30px] lg:px-[42px] py-[8px] md:py-[12px] lg:py-[12px] bg-blue-600 text-white hover:text-blue-600 hover:bg-white duration-300 ease-in"
+                onClick={handleAddToCart}
+              >
                 Add to Cart
               </button>
             </Space>
@@ -240,13 +262,13 @@ const ProductDetail = ({
               </List.Item>
             </List>
           ) : current === "Comments" ? (
-            <span>Comment</span>
+            <span>There are no comments yet. Be the first to comment</span>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 -mx-[15px]">
-              {/* review blog */}
+              {/* Review Blog*/}
               <Space direction="vertical" className="px-[15px]">
                 {reviews.length === 0 ? (
-                  <>Chưa có bài đánh giá nào. Hãy là người đầu tiên đánh giá</>
+                  <>There are no reviews yet. Be the first to review</>
                 ) : (
                   <>
                     <div className="grid grid-cols-2 gap-x-4">
@@ -282,7 +304,7 @@ const ProductDetail = ({
                         </div>
                       </div>
                     </div>
-                    {/* review */}
+                    {/*Limited show review */}
                     <div className="mt-[8px] md:mt-[12px] lg:mt-[18px] xl:mt-[20px]">
                       {reviews.length > 3 ? (
                         <>
@@ -364,6 +386,7 @@ const ProductDetail = ({
                   Add a Review
                 </h3>
                 <Form
+                  form={form}
                   onFinish={handleReview}
                   initialValues={{ remember: true }}
                   autoComplete="off"

@@ -1,5 +1,5 @@
 "use client";
-import Provider from "@/context/provider";
+import ContextProvider from "@/context/provider";
 import { Content } from "antd/es/layout/layout";
 import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
@@ -10,7 +10,8 @@ import { oswald } from "./ui/fonts";
 import FooterPage from "./ui/footer";
 import { Header } from "./ui/header";
 import MenuPage from "./ui/menu";
-
+import { Provider } from "react-redux";
+import { store } from "@/redux/store/store";
 export default function RootLayout({
   children,
 }: {
@@ -19,17 +20,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={oswald.className}>
-        <Provider>
-          <Header>
-            <Suspense fallback={<Loading />}>
+        <ContextProvider>
+          <Provider store={store}>
+            <Header>
               <MenuPage />
-            </Suspense>
-          </Header>
-          <Content>
-            <Suspense fallback={<Loading />}>{children}</Suspense>
-          </Content>
-          <FooterPage />
-        </Provider>
+            </Header>
+            <Content>
+              <Suspense fallback={<Loading />}>{children}</Suspense>
+            </Content>
+            <FooterPage />
+          </Provider>
+        </ContextProvider>
         <ToastContainer
           position="top-right"
           autoClose={5000}

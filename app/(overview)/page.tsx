@@ -8,7 +8,7 @@ import { Image } from "antd";
 import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import { getAllCategory, getAllProduct } from "../api/product/route";
+import { getAllCategory } from "../api/product/route";
 import ProductView from "../product/product-view/page";
 import BannerOffer from "../ui/bannerOffer";
 import CatelogBanner from "../ui/catelog";
@@ -20,8 +20,25 @@ export const metadata: Metadata = {
   },
   description: "Ecommerce of LeChiHai",
 };
+
+const getAllProduct = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/api/product/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!res.ok) {
+      throw new Error("Failed to fetch products");
+    }
+    return res.json();
+  } catch (e) {
+    console.log(e);
+  }
+};
 export default async function Page() {
-  const product = await JSON.parse(JSON.stringify(await getAllProduct()));
+  const { products } = await getAllProduct();
   const category = await JSON.parse(JSON.stringify(await getAllCategory()));
   return (
     <main className="site-main">
@@ -78,7 +95,7 @@ export default async function Page() {
         />
       </Section>
       <Section className="section-product mb-[70px]">
-        <ProductView product={getProducts(8, product)} category={category} />
+        <ProductView product={getProducts(8, products)} category={category} />
       </Section>
       <Section className="section-banner section-parallax">
         <BannerOffer />
@@ -92,7 +109,7 @@ export default async function Page() {
       </Section>
       <Section className="section-product__seller mb-[70px]">
         <ProductView
-          product={randomProduct(getProducts(4, product))}
+          product={randomProduct(getProducts(4, products))}
           category={category}
         />
       </Section>

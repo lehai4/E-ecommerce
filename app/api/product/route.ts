@@ -5,19 +5,13 @@ import Categories from "@/models/Category";
 import Product from "@/models/Product";
 import { redirect } from "next/navigation";
 
+//getAllProduct
 export async function GET() {
   await connect();
 
   const products = await Product.find();
 
   return Response.json({ products });
-}
-
-export async function getAllProduct() {
-  await connect();
-  const product: TypeProduct[] = await Product.find();
-  if (product.length < 0) throw new Error("Product not found");
-  return product;
 }
 
 export async function getAllCategory() {

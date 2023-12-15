@@ -42,13 +42,15 @@ export default async function Page({ params }: { params: { slug: string } }) {
     JSON.stringify(await getProductByName(params.slug))
   );
   const { products } = await getAllProduct();
+
   const category = await JSON.parse(JSON.stringify(await getAllCategory()));
 
   const { reviews } = await getReviewsByIdProduct(product._id);
+
   return (
     <div className="main-content">
       <BannerPage title=" Product Detail" breacrumb="" />
-      <div className="product-image_area xl:pt-[100px] pt-[50px]">
+      <div className="product-image_area xl:pt-[100px] lg:pt-[100px] pt-[50px]">
         <ProductDetail
           product={product}
           category={category}
