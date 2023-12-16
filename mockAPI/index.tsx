@@ -1,5 +1,10 @@
 import { TypeBannerLink } from "@/interface";
-import { PhoneFilled, MailOutlined } from "@ant-design/icons";
+import {
+  PhoneFilled,
+  MailOutlined,
+  HomeOutlined,
+  ContactsOutlined,
+} from "@ant-design/icons";
 
 type CommentTab = {
   id: number;
@@ -132,5 +137,25 @@ export const commentTab: CommentTab[] = [
   {
     id: 3,
     title: "Reviews",
+  },
+];
+export const contact = [
+  {
+    id: 0,
+    icon: <HomeOutlined />,
+    title: "Ho Chi Minh City",
+    info: "Tan Binh HCM",
+  },
+  {
+    id: 1,
+    icon: <ContactsOutlined />,
+    title: "037 6782 528",
+    info: "Mon to Fri 9am to 6pm",
+  },
+  {
+    id: 2,
+    icon: <MailOutlined />,
+    title: "chihaile4@gmail.com",
+    info: "Send us your query anytime!",
   },
 ];

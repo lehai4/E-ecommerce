@@ -1,10 +1,11 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppDispatch } from "@/hooks";
 import { TypeCategory, TypeProduct, TypeReview } from "@/interface";
 import { convertPathname } from "@/lib/utils/convertPathname";
 import { getReviewMore } from "@/lib/utils/getSliceProduct";
 import { commentTab } from "@/mockAPI";
+import { AddToCart } from "@/redux/slice/cartSlice";
 import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import {
@@ -28,7 +29,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
-import { AddToCart } from "@/redux/slice/cartSlice";
 
 type FieldType = {
   name?: string;
