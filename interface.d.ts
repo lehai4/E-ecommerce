@@ -34,6 +34,7 @@ interface TypeProduct {
   image: string;
   price: number;
   quantity: number;
+  total?: number | string;
   specification: Specification;
 }
 interface Specification {

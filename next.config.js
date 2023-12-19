@@ -9,6 +9,7 @@ const nextConfig = {
     domains: [
       "lh3.googleusercontent.com",
       "images.pexels.com",
+      "deo.shopeemobile.com",
       "preview.colorlib.com",
       "websitedemos.net",
       "luba.de",

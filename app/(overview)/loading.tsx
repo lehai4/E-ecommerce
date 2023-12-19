@@ -11,7 +11,7 @@ const Loading = () => {
       setSpinning(false);
     }, 3000);
   }, []);
-  return <Spin spinning={spinning} fullscreen />;
+  return <Spin spinning={spinning} />;
 };
 
 export default Loading;

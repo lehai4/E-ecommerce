@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { TypeProduct } from "@/interface";
+import { ObjectId } from "mongodb";
 
 interface CartState {
   numberCart: number;
@@ -43,17 +44,50 @@ export const cartSlice = createSlice({
       }
       state.numberCart++;
     },
-    updateCart: (state, action: PayloadAction<number>) => {},
     deleteItemCart: (state, action: PayloadAction<TypeProduct>) => {
       state.numberCart--;
       state.cartArr = state.cartArr.filter(
         (item) => item._id !== action.payload._id
       );
     },
+    decreaseQuantity: (
+      state,
+      action: PayloadAction<{
+        _id: ObjectId;
+        quantity: number;
+      }>
+    ) => {
+      state.cartArr.map((item) => {
+        if (item._id === action.payload._id) {
+          item.quantity = action.payload.quantity;
+          item.total = action.payload.quantity * item.price;
+        }
+      });
+    },
+    increaseQuantity: (
+      state,
+      action: PayloadAction<{
+        _id: ObjectId;
+        quantity: number;
+      }>
+    ) => {
+      state.cartArr.map((item) => {
+        if (item._id === action.payload._id) {
+          item.quantity = action.payload.quantity;
+          item.total = action.payload.quantity * item.price;
+        }
+      });
+    },
   },
 });
 
-export const { AddToCart, updateCart, deleteItemCart, getCart, clearAllCart } =
-  cartSlice.actions;
+export const {
+  AddToCart,
+  deleteItemCart,
+  getCart,
+  clearAllCart,
+  decreaseQuantity,
+  increaseQuantity,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

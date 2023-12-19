@@ -2,7 +2,7 @@ import BannerPage from "@/app/ui/bannerPage";
 import MapComponent from "@/app/ui/googleMap";
 import Section from "../components/section";
 import ContactInfo from "../ui/contact";
-const ContactPage = () => {
+const ContactPage = async () => {
   return (
     <div className="main-content">
       <BannerPage title="Contact Us" />

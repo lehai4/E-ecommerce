@@ -3,10 +3,9 @@ import {
   footerBannerImage,
   footerBannerLink,
 } from "@/mockAPI";
-import { Button, Layout, Space, Typography } from "antd";
+import { Button, Space, Typography } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-const { Footer } = Layout;
 const FooterPage = () => {
   return (
     <footer className="bg-sky-900">

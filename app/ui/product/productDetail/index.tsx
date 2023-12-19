@@ -98,6 +98,7 @@ const ProductDetail = ({
     let customProduct = {
       ...product,
       quantity: quantity ?? 1,
+      total: Number(quantity) * product.price,
     };
     dispatcher(AddToCart(customProduct));
   };
