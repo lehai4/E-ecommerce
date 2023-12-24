@@ -1,17 +1,5 @@
-"use client";
-import { Spin } from "antd";
-import { useEffect, useState } from "react";
+import { HomeSkeleton } from "../ui/skeleton";
 
-const Loading = () => {
-  const [spinning, setSpinning] = useState<boolean>(false);
-
-  useEffect(() => {
-    setSpinning(true);
-    setTimeout(() => {
-      setSpinning(false);
-    }, 3000);
-  }, []);
-  return <Spin spinning={spinning} />;
-};
-
-export default Loading;
+export default function Loading() {
+  return <HomeSkeleton />;
+}

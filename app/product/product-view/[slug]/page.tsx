@@ -6,6 +6,8 @@ import ProductDetail from "@/app/ui/product/productDetail";
 import ProductView from "../page";
 import { randomProduct } from "@/lib/utils/randomProduct";
 import { getProducts } from "@/lib/utils/getSliceProduct";
+import { ProductViewsSkeleton } from "@/app/ui/skeleton";
+import { Suspense } from "react";
 
 const getReviewsByIdProduct = async (id: string) => {
   try {
@@ -21,27 +23,10 @@ const getReviewsByIdProduct = async (id: string) => {
   }
 };
 
-const getAllProduct = async () => {
-  try {
-    const res = await fetch("http://localhost:3000/api/product/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch products");
-    }
-    return res.json();
-  } catch (e) {
-    console.log(e);
-  }
-};
 export default async function Page({ params }: { params: { slug: string } }) {
   const product = await JSON.parse(
     JSON.stringify(await getProductByName(params.slug))
   );
-  const { products } = await getAllProduct();
 
   const category = await JSON.parse(JSON.stringify(await getAllCategory()));
 
@@ -65,10 +50,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
         />
       </Section>
       <Section className="section-product__seller mb-[70px]">
-        <ProductView
-          product={randomProduct(getProducts(4, products))}
-          category={category}
-        />
+        <Suspense fallback={<ProductViewsSkeleton />}>
+          <ProductView countShowProduct={4} />
+        </Suspense>
       </Section>
     </div>
   );

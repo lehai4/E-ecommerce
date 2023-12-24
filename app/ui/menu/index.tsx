@@ -1,3 +1,4 @@
+"use client";
 import { Menu, MenuProps } from "antd";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -20,16 +21,7 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem(<Link href="/">Home</Link>, "/"),
-  getItem("Shop", "/#shop", "", [
-    getItem(
-      <Link href="/shop/shop-category">Shop Category</Link>,
-      "/shop/shop-category"
-    ),
-    getItem(
-      <Link href="/shop/product-details">Product Details</Link>,
-      "/shop/product-details"
-    ),
-  ]),
+  getItem(<Link href="/product">Product</Link>, "/product"),
   getItem("Blog", "/#blog", "", [
     getItem(<Link href="/blog">Blog</Link>, "/blog", ""),
     getItem(
@@ -37,7 +29,6 @@ const items: MenuItem[] = [
       "/blog/blog-detail"
     ),
   ]),
-  getItem(<Link href="/pages">Pages</Link>, "/pages"),
 
   getItem(<Link href="/contact">Contact</Link>, "/contact"),
 ];

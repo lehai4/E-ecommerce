@@ -1,7 +1,8 @@
 "use client";
 import { FieldType } from "@/interface";
 import { signUpWithCredentials } from "@/lib/actions";
-import { Button, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
+import { GoogleOutlined } from "@ant-design/icons";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -42,7 +43,6 @@ const AuthForm = () => {
         name="login"
         layout="vertical"
         initialValues={{ remember: true }}
-        className="mt-24"
         onFinish={handleFinished}
       >
         {pathname === "/auth/signin" ? (
@@ -71,22 +71,35 @@ const AuthForm = () => {
             >
               <Input.Password size="large" />
             </Form.Item>
-            <Form.Item className="flex justify-end ">
-              <Link href={`/auth/register`} style={{ fontStyle: "italic" }}>
-                Do you have account?
-              </Link>
+
+            <Form.Item<FieldType> name="remember" valuePropName="checked">
+              <Checkbox>Remember me</Checkbox>
             </Form.Item>
 
-            <Form.Item className="flex justify-end">
-              <Button type="primary" htmlType="submit" className="bg-blue-500">
-                Login
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="bg-blue-500 w-full"
+                shape="round"
+              >
+                Sign In
+              </Button>
+            </Form.Item>
+            <Form.Item>
+              <Button
+                onClick={() => signIn("google", { callbackUrl: "/" })}
+                icon={<GoogleOutlined />}
+                className="w-full"
+              >
+                Login with Google
               </Button>
             </Form.Item>
           </>
         ) : (
           <>
             <Form.Item<FieldType>
-              label="username"
+              label="Username"
               name="name"
               rules={[
                 { required: true },
@@ -123,28 +136,23 @@ const AuthForm = () => {
               <Input size="large" />
             </Form.Item>
 
-            <Form.Item className="flex  justify-end">
-              <div className="flex justify-between gap-4 items-center">
-                <Button type="primary" className="bg-blue-500">
-                  <Link href="/auth/signin">Back</Link>
-                </Button>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="bg-blue-500"
-                >
-                  Register
-                </Button>
-              </div>
+            <Form.Item<FieldType> name="remember" valuePropName="checked">
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                shape="round"
+                className="bg-blue-500 w-full"
+              >
+                Register
+              </Button>
             </Form.Item>
           </>
         )}
       </Form>
-      {pathname === "/auth/signin" && (
-        <Button onClick={() => signIn("google", { callbackUrl: "/" })}>
-          Login with Google
-        </Button>
-      )}
     </>
   );
 };

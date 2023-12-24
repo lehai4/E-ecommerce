@@ -97,7 +97,7 @@ const Cart = () => {
             <button
               className="rounded-full border border-blue-600 text-base px-[25px] md:px-[30px] lg:px-[42px] py-[8px] md:py-[12px] lg:py-[12px] bg-blue-600 text-white hover:text-blue-600 hover:bg-white duration-300 ease-in"
               onClick={() => {
-                router.push("/shop/shop-category");
+                router.push("/product");
               }}
             >
               Continue Shopping
@@ -239,7 +239,7 @@ const Cart = () => {
                   size="large"
                   className="font-semibold bg-gray-50"
                   onClick={() => {
-                    router.push("/shop/shop-category");
+                    router.push("/product");
                   }}
                 >
                   Continue Shopping
@@ -250,7 +250,7 @@ const Cart = () => {
                   className="font-semibold bg-blue-600"
                   type="primary"
                   onClick={() => {
-                    router.push(`/shop/product-checkout`);
+                    router.push(`/cart/checkout`);
                   }}
                 >
                   Process To Checkout

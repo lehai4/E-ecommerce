@@ -13,6 +13,7 @@ interface FieldType {
   name?: string;
   password?: string;
   email?: string;
+  remember?: boolean;
 }
 interface TypeUser {
   _id: string;

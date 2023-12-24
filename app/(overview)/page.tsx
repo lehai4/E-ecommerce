@@ -2,17 +2,14 @@ import Section from "@/app/components/section";
 import Intro from "@/app/ui/intro";
 import News from "@/app/ui/news";
 import Subscribe from "@/app/ui/subscribe";
-import { getProducts } from "@/lib/utils/getSliceProduct";
-import { randomProduct } from "@/lib/utils/randomProduct";
 import { Image } from "antd";
 import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import { getAllCategory } from "../api/product/route";
 import ProductView from "../product/product-view/page";
 import BannerOffer from "../ui/bannerOffer";
 import CatelogBanner from "../ui/catelog";
-import { CatesSkeleton } from "../ui/skeleton";
+import { ProductViewsSkeleton } from "../ui/skeleton";
 export const metadata: Metadata = {
   title: {
     template: "%s | Ecommerce",
@@ -21,25 +18,7 @@ export const metadata: Metadata = {
   description: "Ecommerce of LeChiHai",
 };
 
-const getAllProduct = async () => {
-  try {
-    const res = await fetch("http://localhost:3000/api/product/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch products");
-    }
-    return res.json();
-  } catch (e) {
-    console.log(e);
-  }
-};
 export default async function Page() {
-  const { products } = await getAllProduct();
-  const category = await JSON.parse(JSON.stringify(await getAllCategory()));
   return (
     <main className="site-main">
       <Section
@@ -83,9 +62,7 @@ export default async function Page() {
         </div>
       </Section>
       <Section className="section-catelog mt-[0px] xl:mb-[120px] lg:mb-[70px]">
-        <Suspense fallback={<CatesSkeleton />}>
-          <CatelogBanner />
-        </Suspense>
+        <CatelogBanner />
       </Section>
       <Section className="section-title mt-[120px]">
         <Intro
@@ -95,7 +72,9 @@ export default async function Page() {
         />
       </Section>
       <Section className="section-product mb-[70px]">
-        <ProductView product={getProducts(8, products)} category={category} />
+        <Suspense fallback={<ProductViewsSkeleton />}>
+          <ProductView countShowProduct={8} />
+        </Suspense>
       </Section>
       <Section className="section-banner section-parallax">
         <BannerOffer />
@@ -108,10 +87,9 @@ export default async function Page() {
         />
       </Section>
       <Section className="section-product__seller mb-[70px]">
-        <ProductView
-          product={randomProduct(getProducts(4, products))}
-          category={category}
-        />
+        <Suspense fallback={<ProductViewsSkeleton />}>
+          <ProductView countShowProduct={4} />
+        </Suspense>
       </Section>
       <Section className="section-title mt-[120px]">
         <Intro

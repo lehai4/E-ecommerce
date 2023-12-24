@@ -1,10 +1,10 @@
+"use client";
 import {
   footerBannerAddress,
   footerBannerImage,
   footerBannerLink,
 } from "@/mockAPI";
-import { Button, Space, Typography } from "antd";
-import Image from "next/image";
+import { Button, Image, Space, Typography } from "antd";
 import Link from "next/link";
 const FooterPage = () => {
   return (
@@ -51,11 +51,11 @@ const FooterPage = () => {
                 {footerBannerImage.map((item, i) => (
                   <Image
                     src={`/${item.url}`}
-                    priority
                     alt="Picture of footer Image"
                     key={i}
                     width={70}
-                    height={100}
+                    preview={false}
+                    className="w-auto h-auto"
                   />
                 ))}
               </div>

@@ -1,7 +1,9 @@
 "use client";
 import ContextProvider from "@/context/provider";
+import { store } from "@/redux/store/store";
 import { Content } from "antd/es/layout/layout";
 import { Suspense } from "react";
+import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "./(overview)/loading";
@@ -10,8 +12,7 @@ import { oswald } from "./ui/fonts";
 import FooterPage from "./ui/footer";
 import { Header } from "./ui/header";
 import MenuPage from "./ui/menu";
-import { Provider } from "react-redux";
-import { store } from "@/redux/store/store";
+
 export default function RootLayout({
   children,
 }: {
