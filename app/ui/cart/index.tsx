@@ -40,7 +40,7 @@ const Cart = () => {
       name: cart.name,
       price: cart.price,
       quantity: cart.quantity,
-      total: `${cart.total}`,
+      total: `${cart.total || cart.price}`,
     };
   });
 

@@ -1,5 +1,8 @@
 import { TypeCategory, TypeProduct } from "@/interface";
-import { comparePath } from "@/lib/utils/convertPathname";
+import {
+  comparePath,
+  compareToLowerSearchProduct,
+} from "@/lib/utils/convertPathname";
 import { connect } from "@/lib/utils/database";
 import Categories from "@/models/Category";
 import Product from "@/models/Product";
@@ -8,11 +11,15 @@ import { redirect } from "next/navigation";
 //GET
 export async function GET() {
   // getAllProduct
-  await connect();
+  try {
+    await connect();
 
-  const products = await Product.find();
+    const products = await Product.find();
 
-  return Response.json({ products });
+    return Response.json({ products });
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 //POST
@@ -27,6 +34,12 @@ export async function POST(req: Request, res: Response) {
     return Response.json(data, { status: 200 });
   } else if (type === "getProductByCategory") {
     const data = await getProductByCategory(rest.catelog);
+
+    const products = await data;
+
+    return Response.json(products, { status: 200 });
+  } else if (type === "getProductBySearch") {
+    const data = await getProductBySearch(rest.search);
 
     const products = await data;
 
@@ -55,6 +68,21 @@ export async function getProductByPrice(rangePrice: number[]) {
     await connect();
 
     const products = await Product.find();
+
+    return products;
+  } catch (err) {
+    redirect(`/errors?error=${err}`);
+  }
+}
+
+// getProductBySearch
+export async function getProductBySearch(search: string) {
+  try {
+    await connect();
+    const searchString = await compareToLowerSearchProduct(search);
+    const products = await Product.find({
+      name: searchString,
+    });
 
     return products;
   } catch (err) {

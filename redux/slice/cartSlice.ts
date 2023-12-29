@@ -26,6 +26,7 @@ export const cartSlice = createSlice({
       state.numberCart = 0;
     },
     AddToCart: (state, action: PayloadAction<TypeProduct>) => {
+      console.log(action.payload);
       if (state.numberCart === 0) {
         state.cartArr.push(action.payload);
       } else {

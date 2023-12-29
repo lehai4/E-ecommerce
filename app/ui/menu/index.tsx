@@ -1,58 +1,26 @@
 "use client";
-import { Menu, MenuProps } from "antd";
+import { page } from "@/mockAPI";
+import { Typography } from "antd";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
-type MenuItem = Required<MenuProps>["items"][number];
-
-function getItem(
-  label: React.ReactNode,
-  key?: React.Key | null,
-  icon?: React.ReactNode,
-  children?: MenuItem[]
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem;
-}
-
-const items: MenuItem[] = [
-  getItem(<Link href="/">Home</Link>, "/"),
-  getItem(<Link href="/product">Product</Link>, "/product"),
-  getItem("Blog", "/#blog", "", [
-    getItem(<Link href="/blog">Blog</Link>, "/blog", ""),
-    getItem(
-      <Link href="/blog/blog-detail">Blog Detail</Link>,
-      "/blog/blog-detail"
-    ),
-  ]),
-
-  getItem(<Link href="/contact">Contact</Link>, "/contact"),
-];
 const MenuPage = () => {
-  const router = useRouter();
   const pathname = usePathname();
-  const onClick: MenuProps["onClick"] = (e) => {
-    router.push(`${e.key}`);
-  };
+
   return (
-    <Menu
-      mode="horizontal"
-      defaultSelectedKeys={[`${pathname}`]}
-      items={items}
-      style={{
-        width: "inherit",
-        float: "right",
-        border: "none",
-        fontSize: 16,
-      }}
-      onClick={onClick}
-      selectedKeys={[`${pathname}`]}
-      className="bg-white"
-    />
+    <div className="flex flex-row items-center gap-6">
+      {page.map((item, index) => (
+        <Link href={`${item.path}`} key={index}>
+          <Typography.Text
+            className={`text-[16px] relative hover:text-blue-500 duration-200 ease-in transition-all ${
+              pathname === `${item.path}` ? "text-blue-500 " : "text-black"
+            }`}
+          >
+            {item.content}
+          </Typography.Text>
+        </Link>
+      ))}
+    </div>
   );
 };
 

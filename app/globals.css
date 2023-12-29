@@ -55,6 +55,19 @@
 .card-news:hover .card-news__link span {
   padding-left: 10px;
 }
+
+/* override Ant */
+
+/* :where(.css-dev-only-do-not-override-nllxry).ant-menu-light.ant-menu-horizontal
+  > .ant-menu-item:hover::after {
+  border: none !important;
+  color: transparent !important;
+}
+:where(.css-dev-only-do-not-override-nllxry).ant-menu-light.ant-menu-horizontal
+  > .ant-menu-item-selected::after {
+  border: none !important;
+  color: transparent !important;
+} */
 /* Breakpoint config */
 @media (min-width: 575px) {
   .hero-banner::before {

@@ -8,7 +8,17 @@ import ProductView from "./product-view/page";
 import Intro from "../ui/intro";
 import Subscribe from "../ui/subscribe";
 
-async function Product() {
+async function Product({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
+
   const category = await JSON.parse(JSON.stringify(await getAllCategory()));
 
   return (

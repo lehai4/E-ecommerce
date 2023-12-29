@@ -15,3 +15,12 @@ export const comparePath = async (path: string) => {
   const pathNew = upper.join(" ");
   return pathNew;
 };
+
+export const compareToLowerSearchProduct = async (search: string) => {
+  const cutString = search.split(" ");
+  const upper = cutString.map((element) => {
+    return element.charAt(0).toUpperCase() + element.slice(1);
+  });
+  const pathNew = upper.join(" ");
+  return pathNew;
+};

@@ -3,20 +3,12 @@ import Intro from "@/app/ui/intro";
 import News from "@/app/ui/news";
 import Subscribe from "@/app/ui/subscribe";
 import { Image } from "antd";
-import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import ProductView from "../product/product-view/page";
 import BannerOffer from "../ui/bannerOffer";
 import CatelogBanner from "../ui/catelog";
 import { ProductViewsSkeleton } from "../ui/skeleton";
-export const metadata: Metadata = {
-  title: {
-    template: "%s | Ecommerce",
-    default: "Ecommerce",
-  },
-  description: "Ecommerce of LeChiHai",
-};
 
 export default async function Page() {
   return (

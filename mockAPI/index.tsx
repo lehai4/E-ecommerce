@@ -11,6 +11,29 @@ type CommentTab = {
   title: string;
   content?: string | any;
 };
+
+export const page = [
+  {
+    id: 0,
+    path: "/",
+    content: "Home",
+  },
+  {
+    id: 1,
+    path: "/product",
+    content: "Product",
+  },
+  {
+    id: 2,
+    path: "/blog",
+    content: "Blog",
+  },
+  {
+    id: 3,
+    path: "/contact",
+    content: "Contact",
+  },
+];
 export const newsBlog = [
   {
     id: 0,

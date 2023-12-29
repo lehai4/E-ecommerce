@@ -31,6 +31,8 @@ const ProductView = async ({
 }: {
   countShowProduct: number;
 }) => {
+  // const dispath = useAppDispatch();
+
   const { products } = await getAllProduct();
   const category: TypeCategory[] = await JSON.parse(
     JSON.stringify(await getAllCategory())
@@ -57,7 +59,17 @@ const ProductView = async ({
                       <MagnifyingGlassIcon className="h-5 w-5 text-white" />
                     </button>
                     <button className="rounded-md p-2 bg-purple-700 border border-purple-700 hover:bg-sky-500 hover:border-sky-500 duration-200 ease-in transition-all">
-                      <ShoppingCartIcon className="h-5 w-5 text-white" />
+                      <ShoppingCartIcon
+                        className="h-5 w-5 text-white"
+                        // onClick={() => {
+                        //   dispath(
+                        //     AddToCart({
+                        //       ...product,
+                        //       quantity: 1,
+                        //     })
+                        //   );
+                        // }}
+                      />
                     </button>
                     <button className="rounded-md p-2 bg-purple-700 border border-purple-700 hover:bg-sky-500 hover:border-sky-500 duration-200 ease-in transition-all">
                       <HeartIcon className="h-5 w-5 text-white" />
