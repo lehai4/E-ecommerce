@@ -34,6 +34,7 @@ const BannerContent: React.FC = () => (
                 maxHeight: 400,
                 maxWidth: "100%",
               }}
+              alt="Bag"
               className="hidden md:hidden sm:block lg:block xl:block px-[0px] sm:px-[0px]  md:px-[0px] lg:px-[38px] xl:px-[38px] "
             />
           </div>
@@ -65,6 +66,7 @@ const BannerContent: React.FC = () => (
                 maxHeight: 400,
                 maxWidth: "100%",
               }}
+              alt="Nike Black"
               className="hidden md:hidden sm:block lg:block xl:block px-[0px] sm:px-[0px]  md:px-[0px] lg:px-[38px] xl:px-[38px] "
             />
           </div>
