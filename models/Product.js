@@ -24,6 +24,10 @@ const productScheme = new Schema(
     specification: {
       type: Object,
     },
+    priority: {
+      type: String,
+      default: "Latest",
+    },
   },
   { timestamps: true }
 );

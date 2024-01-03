@@ -5,7 +5,13 @@ import {
   HomeOutlined,
   ContactsOutlined,
 } from "@ant-design/icons";
-
+import {
+  ShoppingBagIcon,
+  CreditCardIcon,
+  TruckIcon,
+  CurrencyYenIcon,
+  ShieldExclamationIcon,
+} from "@heroicons/react/24/outline";
 type CommentTab = {
   id: number;
   title: string;
@@ -74,6 +80,11 @@ export const newsBlog = [
       "Professional design staff and efficient equipment you’ll find we offer",
     desc: "Let one fifth i bring fly to divided face for bearing divide unto seed. Winged divided light Forth.",
     path: "/news/design-news",
+  },
+];
+export const BlogContent = [
+  {
+    id: 0,
   },
 ];
 export const footerBannerLink: TypeBannerLink[] = [
@@ -180,5 +191,27 @@ export const contact = [
     icon: <MailOutlined />,
     title: "chihaile4@gmail.com",
     info: "Send us your query anytime!",
+  },
+];
+export const policy = [
+  {
+    name: "Fast Delivery",
+    description: "Free shipping with orders > 239K",
+    icon: <TruckIcon className="h-8 w-8" />,
+  },
+  {
+    name: "Payment COD",
+    description: "Payment on delivery (COD)",
+    icon: <CreditCardIcon className="h-8 w-8" />,
+  },
+  {
+    name: "Customer VIP",
+    description: "Promotions for VIP customers",
+    icon: <CurrencyYenIcon className="h-8 w-8" />,
+  },
+  {
+    name: "Warranty support",
+    description: "Exchange items at all stores",
+    icon: <ShieldExclamationIcon className="h-8 w-8" />,
   },
 ];

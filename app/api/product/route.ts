@@ -44,6 +44,12 @@ export async function POST(req: Request, res: Response) {
     const products = await data;
 
     return Response.json(products, { status: 200 });
+  } else if (type === "getProductBySort") {
+    const data = await getProductBySort(rest.sortValue);
+
+    const products = await data;
+
+    return Response.json(products, { status: 200 });
   }
 }
 // getProductByCategory
@@ -89,7 +95,18 @@ export async function getProductBySearch(search: string) {
     redirect(`/errors?error=${err}`);
   }
 }
+export async function getProductBySort(sortValue: string) {
+  try {
+    await connect();
+    const products = await Product.find({
+      priority: sortValue,
+    });
 
+    return products;
+  } catch (err) {
+    redirect(`/errors?error=${err}`);
+  }
+}
 // getAllCategory
 export async function getAllCategory() {
   await connect();

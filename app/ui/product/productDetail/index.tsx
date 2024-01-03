@@ -297,6 +297,7 @@ const ProductDetail = ({
                               </Typography.Text>
                               <Rate
                                 allowHalf
+                                disabled
                                 className="flex flex-1 xl:text-[18px] lg:text-[16px] md:text-[15px] sm:text-[14px]"
                                 value={Number(review.rating.split(" ")[0])}
                               />
@@ -325,6 +326,7 @@ const ProductDetail = ({
                                   </Typography.Text>
                                   <Rate
                                     allowHalf
+                                    disabled
                                     value={Number(review.rating.split(" ")[0])}
                                   />
                                 </Space>
@@ -367,6 +369,7 @@ const ProductDetail = ({
                                 </Typography.Text>
                                 <Rate
                                   allowHalf
+                                  disabled
                                   value={Number(review.rating.split(" ")[0])}
                                 />
                               </Space>

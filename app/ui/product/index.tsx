@@ -42,13 +42,14 @@ const ProductIndex = ({ category }: { category: TypeCategory[] }) => {
 
   const [catelog, setCatelog] = useState<string>("");
   const [search, setSearch] = useState<string>("");
+  const [sortValue, setSortValue] = useState("Default sorting");
   const [rangePrice, setRangePrice] = useState([1, 10000]);
 
   const handleCategoryChange = (e: RadioChangeEvent) => {
     setCatelog(e.target.value);
   };
   const handleChangeSort = (value: string) => {
-    console.log(`selected ${value}`);
+    setSortValue(value);
   };
   const handleChangePagination = (value: string) => {
     console.log(`selected ${value}`);
@@ -56,6 +57,7 @@ const ProductIndex = ({ category }: { category: TypeCategory[] }) => {
   const handleClearFilter = () => {
     setCatelog("");
     setSearch("");
+    setSortValue("Default sorting");
     setRangePrice([1, 10000]);
   };
 
@@ -137,6 +139,7 @@ const ProductIndex = ({ category }: { category: TypeCategory[] }) => {
                     style={{ width: 250 }}
                     onChange={handleChangeSort}
                     options={sortArr}
+                    value={sortValue}
                     defaultValue={"Default sorting"}
                   />
                   <Select
@@ -159,6 +162,7 @@ const ProductIndex = ({ category }: { category: TypeCategory[] }) => {
               category={category}
               search={search}
               catelog={catelog}
+              sortValue={sortValue}
               rangePrice={rangePrice}
             />
           </Suspense>

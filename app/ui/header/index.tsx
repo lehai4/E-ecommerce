@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { TypeProduct } from "@/interface";
 import { clearAllCart, deleteItemCart } from "@/redux/slice/cartSlice";
 import {
-  SearchOutlined,
+  HeartOutlined,
   ShoppingCartOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
@@ -15,20 +15,26 @@ import {
   List,
   Popover,
   Space,
+  Tooltip,
   Typography,
 } from "antd";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import AndyLogo from "../logo";
+import { MenuOfMobile } from "../menu";
 
 export const Header = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
+  const router = useRouter();
   const dispatcher = useAppDispatch();
   const { data: session } = useSession();
   const cartArr = useAppSelector((state) => state.cart.cartArr);
-  const cartLenght = useAppSelector((state) => state.cart.numberCart);
+  const cartLength = useAppSelector((state) => state.cart.numberCart);
+  const wishListLength = useAppSelector(
+    (state) => state.wishList.numberWishList
+  );
 
   const [open, setOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -41,7 +47,7 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
     return cartArr.reduce((acc, current) => {
       return acc + current.price * current.quantity;
     }, 0);
-  }, [cartArr, cartLenght]);
+  }, [cartArr, cartLength]);
 
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -65,15 +71,21 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
             </div>
             <div className="hidden sm:hidden md:hidden lg:block xl:block">
               <div className="flex flex-row items-center gap-2 text-xl h-full">
-                <Button
-                  icon={<SearchOutlined />}
-                  className="flex items-center justify-center"
-                />
+                <Tooltip title="WishList" color="gray">
+                  <Link href="/wish-list">
+                    <Badge count={wishListLength} showZero>
+                      <Button
+                        icon={<HeartOutlined />}
+                        className="flex items-center justify-center"
+                      />
+                    </Badge>
+                  </Link>
+                </Tooltip>
 
                 <Popover
                   trigger="hover"
                   content={
-                    cartLenght > 0 ? (
+                    cartLength > 0 ? (
                       <List>
                         {cartArr.map((item, i) => (
                           <List.Item
@@ -138,7 +150,7 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
                   }
                 >
                   <Link href="/cart">
-                    <Badge count={cartLenght} showZero>
+                    <Badge count={cartLength} showZero>
                       <Button icon={<ShoppingCartOutlined />} />
                     </Badge>
                   </Link>
@@ -216,15 +228,21 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
             </div>
             <div className="hidden sm:hidden md:hidden lg:block xl:block">
               <div className="flex flex-row items-center gap-2 text-xl h-full">
-                <Button
-                  icon={<SearchOutlined />}
-                  className="flex items-center justify-center"
-                />
+                <Tooltip title="WishList" color="gray">
+                  <Link href="/wish-list">
+                    <Badge count={wishListLength} showZero>
+                      <Button
+                        icon={<HeartOutlined />}
+                        className="flex items-center justify-center"
+                      />
+                    </Badge>
+                  </Link>
+                </Tooltip>
 
                 <Popover
                   trigger="hover"
                   content={
-                    cartLenght > 0 ? (
+                    cartLength > 0 ? (
                       <List>
                         {cartArr.map((item, i) => (
                           <List.Item
@@ -289,7 +307,7 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
                   }
                 >
                   <Link href="/cart">
-                    <Badge count={cartLenght} showZero>
+                    <Badge count={cartLength} showZero>
                       <Button icon={<ShoppingCartOutlined />} />
                     </Badge>
                   </Link>
@@ -344,11 +362,26 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
               </div>
             </div>
             <Space className="block sm:block md:block lg:hidden xl:hidden">
-              <UnorderedListOutlined className="text-2xl" />
+              <UnorderedListOutlined
+                className="text-2xl"
+                onClick={() => setOpen(true)}
+              />
             </Space>
           </div>
         </div>
       </div>
+
+      <Drawer
+        title="Menu"
+        placement="right"
+        width={250}
+        onClose={() => {
+          setOpen((preV) => !preV);
+        }}
+        open={open}
+      >
+        <MenuOfMobile pathname={pathname} router={router} setOpen={setOpen} />
+      </Drawer>
     </header>
   );
 };
