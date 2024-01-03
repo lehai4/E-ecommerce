@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 
 const BannerOffer = () => {
@@ -19,7 +18,7 @@ const BannerOffer = () => {
             >
               Him she'd let them sixth saw light
             </p>
-            <Link href="/#">
+            <Link href="/product">
               <button className="rounded-full border border-blue-600 text-base lg:mt-[25px] xl:mt-[25px] px-[25px] md:px-[30px] lg:px-[42px] py-[8px] md:py-[12px] lg:py-[12px] bg-blue-600 text-white hover:text-blue-600 hover:bg-white  duration-300 ease-in">
                 Shop Now
               </button>
