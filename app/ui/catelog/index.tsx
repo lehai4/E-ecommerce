@@ -28,13 +28,14 @@ export const CatelogView = ({ category }: { category: TypeCategory[] }) => (
   <div>
     <Carousel
       responsive={responsive}
-      transitionDuration={500}
-      infinite
-      swipeable={false}
-      draggable={false}
-      autoPlaySpeed={1000}
-      keyBoardControl={true}
-      slidesToSlide={1}
+      autoPlay={true}
+      swipeable={true}
+      draggable={true}
+      infinite={true}
+      keyBoardControl={false}
+      renderArrowsWhenDisabled={true}
+      removeArrowOnDeviceType={["mobile", "tablet", "desktop"]}
+      partialVisible={false}
       containerClass="carousel-container"
       itemClass="px-[10px]"
     >
@@ -47,6 +48,7 @@ export const CatelogView = ({ category }: { category: TypeCategory[] }) => (
               height={533}
               style={{ height: 533, width: 613, backgroundPosition: "center" }}
             />
+
             <Link
               href={`/category/${convertPathname(cate.catelog)}`}
               className="card-catelog__imgOverlay"

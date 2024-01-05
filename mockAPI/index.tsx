@@ -1,16 +1,19 @@
 import { TypeBannerLink } from "@/interface";
 import {
-  PhoneFilled,
-  MailOutlined,
-  HomeOutlined,
+  CalendarOutlined,
+  CommentOutlined,
   ContactsOutlined,
+  EyeOutlined,
+  HomeOutlined,
+  MailOutlined,
+  PhoneFilled,
+  UserOutlined,
 } from "@ant-design/icons";
 import {
-  ShoppingBagIcon,
   CreditCardIcon,
-  TruckIcon,
   CurrencyYenIcon,
   ShieldExclamationIcon,
+  TruckIcon,
 } from "@heroicons/react/24/outline";
 type CommentTab = {
   id: number;
@@ -40,6 +43,8 @@ export const page = [
     content: "Contact",
   },
 ];
+
+// mockAPI of Home
 export const newsBlog = [
   {
     id: 0,
@@ -82,11 +87,7 @@ export const newsBlog = [
     path: "/news/design-news",
   },
 ];
-export const BlogContent = [
-  {
-    id: 0,
-  },
-];
+
 export const footerBannerLink: TypeBannerLink[] = [
   {
     title: "Home",
@@ -213,5 +214,243 @@ export const policy = [
     name: "Warranty support",
     description: "Exchange items at all stores",
     icon: <ShieldExclamationIcon className="h-8 w-8" />,
+  },
+];
+//mockAPI of BlogPage
+export const blogOption = [
+  {
+    id: 0,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/blog/cat-post/cat-post-3.jpg.webp",
+    title: "social life",
+    desc: "Enjoy your social life together",
+  },
+  {
+    id: 1,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/blog/cat-post/cat-post-2.jpg.webp",
+    title: "politics",
+    desc: "Be a part of politics",
+  },
+  {
+    id: 2,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/blog/cat-post/cat-post-1.jpg.webp",
+    title: "food",
+    desc: "Let the food be finished",
+  },
+];
+export const blogPopular = [
+  {
+    id: 0,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/blog/popular-post/post1.jpg.webp",
+    title: "Space The Final Frontier",
+    time: "02 Hours ago",
+  },
+  {
+    id: 1,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/blog/popular-post/post2.jpg.webp",
+    title: "The Amazing Hubble",
+    time: "02 Hours ago",
+  },
+  {
+    id: 2,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/blog/popular-post/post3.jpg.webp",
+    title: "Astronomy Or Astrology",
+    time: "03 Hours ago",
+  },
+  {
+    id: 3,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/blog/popular-post/post4.jpg.webp",
+    title: "Asteroids telescope",
+    time: "01 Hours ago",
+  },
+];
+export const blogCategories = [
+  {
+    title: "Technology",
+    index: "37",
+  },
+  {
+    title: "Lifestyle",
+    index: "24",
+  },
+  {
+    title: "Fashion",
+    index: "59",
+  },
+  {
+    title: "Art",
+    index: "29",
+  },
+  {
+    title: "Food",
+    index: "15",
+  },
+  {
+    title: "Architecture",
+    index: "09",
+  },
+  {
+    title: "Adventure",
+    index: "44",
+  },
+];
+export const blogArticle = [
+  {
+    id: 0,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/blog/main-blog/m-blog-1.jpg.webp",
+    title: "Astronomy Binoculars A Great Alternative",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam accusamus sint tempora magnam, qui suscipit maiores saepe obcaecati! Cumque iusto mollitia minima veniam beatae blanditiis ad aliquam fugiat quod nihil.",
+    tag: ["Food", "Technology", "Politics", "Lifestyle"],
+    meta: [
+      {
+        id_x: 0,
+        title_chill: "Mark wiens",
+        icon: <UserOutlined className="text-[18px]" />,
+      },
+      {
+        id_x: 1,
+        title_chill: "01 Jan, 2024",
+        icon: <CalendarOutlined className="text-[18px]" />,
+      },
+      {
+        id_x: 2,
+        title_chill: "1.2M Views",
+        icon: <EyeOutlined className="text-[18px]" />,
+      },
+      {
+        id_x: 3,
+        title_chill: "06 Comments",
+        icon: <CommentOutlined className="text-[18px]" />,
+      },
+    ],
+  },
+  {
+    id: 1,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/blog/main-blog/m-blog-2.jpg.webp",
+    title: "The Basics Of Buying A Telescope",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam accusamus sint tempora magnam, qui suscipit maiores saepe obcaecati! Cumque iusto mollitia minima veniam beatae blanditiis ad aliquam fugiat quod nihil.",
+    tag: ["Food", "Technology", "Politics", "Lifestyle"],
+    meta: [
+      {
+        id_x: 0,
+        title_chill: "Mark wiens",
+        icon: <UserOutlined className="text-[18px]" />,
+      },
+      {
+        id_x: 1,
+        title_chill: "01 Jan, 2024",
+        icon: <CalendarOutlined className="text-[18px]" />,
+      },
+      {
+        id_x: 2,
+        title_chill: "1.2M Views",
+        icon: <EyeOutlined className="text-[18px]" />,
+      },
+      {
+        id_x: 3,
+        title_chill: "06 Comments",
+        icon: <CommentOutlined className="text-[18px]" />,
+      },
+    ],
+  },
+  {
+    id: 2,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/blog/main-blog/m-blog-3.jpg.webp",
+    title: "The Glossary Of Telescopes",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam accusamus sint tempora magnam, qui suscipit maiores saepe obcaecati! Cumque iusto mollitia minima veniam beatae blanditiis ad aliquam fugiat quod nihil.",
+    tag: ["Food", "Technology", "Politics", "Lifestyle"],
+    meta: [
+      {
+        id_x: 0,
+        title_chill: "Mark wiens",
+        icon: <UserOutlined className="text-[18px]" />,
+      },
+      {
+        id_x: 1,
+        title_chill: "01 Jan, 2024",
+        icon: <CalendarOutlined className="text-[18px]" />,
+      },
+      {
+        id_x: 2,
+        title_chill: "1.2M Views",
+        icon: <EyeOutlined className="text-[18px]" />,
+      },
+      {
+        id_x: 3,
+        title_chill: "06 Comments",
+        icon: <CommentOutlined className="text-[18px]" />,
+      },
+    ],
+  },
+  {
+    id: 3,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/blog/main-blog/m-blog-4.jpg.webp",
+    title: "The Night Sky",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam accusamus sint tempora magnam, qui suscipit maiores saepe obcaecati! Cumque iusto mollitia minima veniam beatae blanditiis ad aliquam fugiat quod nihil.",
+    tag: ["Food", "Technology", "Politics", "Lifestyle"],
+    meta: [
+      {
+        id_x: 0,
+        title_chill: "Mark wiens",
+        icon: <UserOutlined className="text-[18px]" />,
+      },
+      {
+        id_x: 1,
+        title_chill: "01 Jan, 2024",
+        icon: <CalendarOutlined className="text-[18px]" />,
+      },
+      {
+        id_x: 2,
+        title_chill: "1.2M Views",
+        icon: <EyeOutlined className="text-[18px]" />,
+      },
+      {
+        id_x: 3,
+        title_chill: "06 Comments",
+        icon: <CommentOutlined className="text-[18px]" />,
+      },
+    ],
+  },
+];
+export const blogInstar = [
+  {
+    id: 0,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/instagram/ins-1.jpg.webp",
+  },
+  {
+    id: 1,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/instagram/ins-2.jpg.webp",
+  },
+  {
+    id: 2,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/instagram/ins-3.jpg.webp",
+  },
+  {
+    id: 3,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/instagram/ins-4.jpg.webp",
+  },
+  {
+    id: 4,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/instagram/ins-5.jpg.webp",
+  },
+  {
+    id: 5,
+    image:
+      "https://preview.colorlib.com/theme/aroma/img/instagram/ins-6.jpg.webp",
   },
 ];

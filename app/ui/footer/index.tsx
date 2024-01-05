@@ -62,14 +62,15 @@ const FooterPage = () => {
             </div>
             <div className="px-[15px] mb-[30px] lg:mb-[0px]">
               <h4 className="text-white mb-[10px] sm:mb-[28px] lg:mb-[28px] text-[18px] font-[500] capitalize">
-                Contact
+                Contact Us
               </h4>
               <div className="flex flex-col gap-y-3">
                 {footerBannerAddress.map((item, i) => (
                   <div className="flex flex-row justify-start gap-3" key={i}>
                     <Button
                       shape="circle"
-                      className="flex align-middle justify-center items-center bg-sky-500 text-white border-0"
+                      type="primary"
+                      className="flex align-middle justify-center items-center bg-sky-500 text-white border-0 "
                     >
                       {item.icon}
                     </Button>

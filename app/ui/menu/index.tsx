@@ -4,15 +4,10 @@ import { Typography } from "antd";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { convertPathname } from "@/lib/utils/convertPathname";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import React from "react";
-import { convertPathname } from "@/lib/utils/convertPathname";
 
 type MenuItem = Required<MenuProps>["items"][number];
 

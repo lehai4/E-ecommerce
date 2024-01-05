@@ -85,6 +85,14 @@
 .card-news:hover .card-news__link span {
   padding-left: 10px;
 }
+//hover domain /blog
+
+.blog-content #overlayBlog {
+  background: rgba(34, 34, 34, 0.75);
+}
+.blog-content:hover #overlayBlog {
+  background: rgba(56, 74, 235, 0.85);
+}
 /* override Ant */
 .ant-carousel {
   height: inherit;
@@ -93,6 +101,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.carousel-dots-override {
+  margin-bottom: 15px !important;
 }
 /* Breakpoint config */
 @media (min-width: 575px) {
