@@ -2,7 +2,7 @@ export function html({ url, text }: { url: string; text: string }) {
   return `
   <div class="container h-full min-h-screen flex items-center justify-center">
   <div class="border rounded-lg">
-      <h2>Welcome to the NextJs CMS of LeChiHai</h2>
+      <h2>Welcome to the Ecommerce</h2>
       <p>Just click the button below to validate your email address</p>
   </div>
   <button

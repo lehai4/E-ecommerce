@@ -8,6 +8,7 @@ import {
   MailOutlined,
   PhoneFilled,
   UserOutlined,
+  EnvironmentOutlined,
 } from "@ant-design/icons";
 import {
   CreditCardIcon,
@@ -91,27 +92,19 @@ export const newsBlog = [
 export const footerBannerLink: TypeBannerLink[] = [
   {
     title: "Home",
-    path: "/dashboard",
-  },
-  {
-    title: "Shop",
-    path: "/dashboard/shop",
+    path: "/",
   },
   {
     title: "Blog",
-    path: "/dashboard/blog",
+    path: "/blog",
   },
   {
     title: "Product",
-    path: "/dashboard/product",
-  },
-  {
-    title: "Brand",
-    path: "/dashboard/brand",
+    path: "/product",
   },
   {
     title: "Contact",
-    path: "/dashboard/contact",
+    path: "/contact",
   },
 ];
 export const footerBannerImage = [
@@ -139,7 +132,7 @@ export const footerBannerAddress = [
     id: 0,
     intro: "Head Office",
     des: "70, Tan Binh, HCM",
-    icon: <PhoneFilled />,
+    icon: <EnvironmentOutlined />,
   },
   {
     id: 1,
@@ -453,4 +446,11 @@ export const blogInstar = [
     image:
       "https://preview.colorlib.com/theme/aroma/img/instagram/ins-6.jpg.webp",
   },
+];
+export const coupon = [
+  { id: 0, code: "aws-123", info: "10%" },
+  { id: 1, code: "aws-152", info: "5%" },
+  { id: 2, code: "aws-124", info: "8%" },
+  { id: 3, code: "aws-120", info: "15%" },
+  { id: 4, code: "aws-100", info: "3%" },
 ];

@@ -6,8 +6,7 @@ import { convertPathname } from "@/lib/utils/convertPathname";
 import { getReviewMore } from "@/lib/utils/getSliceProduct";
 import { commentTab } from "@/mockAPI";
 import { AddToCart } from "@/redux/slice/cartSlice";
-import DiamondOutlinedIcon from "@mui/icons-material/DiamondOutlined";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { SketchOutlined, HeartOutlined } from "@ant-design/icons";
 import {
   Button,
   Card,
@@ -101,6 +100,7 @@ const ProductDetail = ({
       total: Number(quantity) * product.price,
     };
     dispatcher(AddToCart(customProduct));
+    toast.success("Add To Cart Done!");
   };
   // convert ObjectKey for Specification
   const objectKeys = Object.keys(product.specification);
@@ -202,13 +202,13 @@ const ProductDetail = ({
             </Space>
             <Space direction="horizontal" align="start" className="mt-[35px]">
               <Button
-                icon={<DiamondOutlinedIcon />}
+                icon={<SketchOutlined />}
                 className="flex items-center justify-center bg-gray-100"
                 size="large"
               />
               <Link href={`/whitelist/${convertPathname(product.name)}`}>
                 <Button
-                  icon={<FavoriteBorderIcon />}
+                  icon={<HeartOutlined />}
                   className="flex items-center justify-center bg-gray-100"
                   size="large"
                 />

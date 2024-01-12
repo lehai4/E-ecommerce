@@ -10,7 +10,7 @@ import {
   Space,
   Typography,
 } from "antd";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { CategorysSkeleton } from "../skeleton";
 import ProductByCategory from "./product-category";
 
@@ -29,19 +29,20 @@ const sortArr: SortType[] = [
   { value: "high to low", label: "Sort by price: high to low" },
 ];
 
-const sortPaginate: SortType[] = [
-  { value: "3", label: "3 Paginate" },
-  { value: "6", label: "6 Paginate" },
-  { value: "9", label: "9 Paginate" },
-  { value: "12", label: "12 Paginate" },
-];
-const ProductIndex = ({ category }: { category: TypeCategory[] }) => {
+const ProductIndex = ({
+  category,
+  query,
+  currentPage,
+}: {
+  category: TypeCategory[];
+  query: string;
+  currentPage: number;
+}) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
   const [catelog, setCatelog] = useState<string>("");
-  const [search, setSearch] = useState<string>("");
   const [sortValue, setSortValue] = useState("Default sorting");
   const [rangePrice, setRangePrice] = useState([1, 10000]);
 
@@ -51,12 +52,9 @@ const ProductIndex = ({ category }: { category: TypeCategory[] }) => {
   const handleChangeSort = (value: string) => {
     setSortValue(value);
   };
-  const handleChangePagination = (value: string) => {
-    console.log(`selected ${value}`);
-  };
+
   const handleClearFilter = () => {
     setCatelog("");
-    setSearch("");
     setSortValue("Default sorting");
     setRangePrice([1, 10000]);
   };
@@ -65,18 +63,21 @@ const ProductIndex = ({ category }: { category: TypeCategory[] }) => {
     const params = new URLSearchParams(searchParams);
 
     params.set("page", "1");
-    setSearch(search);
     if (search) {
       params.set("query", search);
     } else {
       params.delete("query");
     }
-    // replace(`${pathname}?${params.toString()}`);
+    replace(`${pathname}?${params.toString()}`);
   }, 500);
+
+  useEffect(() => {
+    window.scrollTo(0, 410);
+  }, [query]);
   return (
     <div className="container">
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
-        <div className="col-span-1">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
+        <div className="col-span-1 md:col-span-1">
           <div>
             <div className="border px-8 py-2.5 bg-blue-600">
               <Typography.Text className="font-semibold tracking-tight text-[19px] text-white">
@@ -130,23 +131,17 @@ const ProductIndex = ({ category }: { category: TypeCategory[] }) => {
             </Button>
           </Space>
         </div>
-        <div className="md:col-span-1 lg:col-span-3 xl:col-span-3">
+        <div className="md:col-span-2 lg:col-span-3 xl:col-span-3">
           <div className="container">
             <div className="bg-gray-100 px-5 py-2.5 mb-8">
-              <Space className="flex flex-row items-center justify-between">
-                <Space>
+              <Space className="flex flex-row items-center flex-wrap justify-between">
+                <Space className="flex-wrap">
                   <Select
-                    style={{ width: 250 }}
+                    style={{ width: 230 }}
                     onChange={handleChangeSort}
                     options={sortArr}
                     value={sortValue}
                     defaultValue={"Default sorting"}
-                  />
-                  <Select
-                    style={{ width: 150 }}
-                    onChange={handleChangePagination}
-                    options={sortPaginate}
-                    defaultValue={"Default Paginate"}
                   />
                 </Space>
                 <Search
@@ -160,7 +155,7 @@ const ProductIndex = ({ category }: { category: TypeCategory[] }) => {
           <Suspense fallback={<CategorysSkeleton />}>
             <ProductByCategory
               category={category}
-              search={search}
+              search={query}
               catelog={catelog}
               sortValue={sortValue}
               rangePrice={rangePrice}

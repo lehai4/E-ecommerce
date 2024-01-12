@@ -25,7 +25,11 @@ async function Product({
     <div className="main-content">
       <BannerPage title="Product Category" />
       <Section className="xl:my-[98px] my-[35px]">
-        <ProductIndex category={category} />
+        <ProductIndex
+          category={category}
+          query={query}
+          currentPage={currentPage}
+        />
       </Section>
       <Section className="section-title mt-[120px]">
         <Intro

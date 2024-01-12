@@ -7,7 +7,7 @@ const ErrorPage = () => {
   const errMessage = searchParams.get("error");
   return (
     <div className="h-full min-h-screen flex items-center justify-center">
-      <Space direction="vertical" align="center">
+      <Space direction="vertical" align="center" style={{ rowGap: 15 }}>
         <h1 className="text-red-500 text-3xl font-bold">{errMessage}</h1>
         <Button onClick={() => router.back()}>Try Again</Button>
       </Space>

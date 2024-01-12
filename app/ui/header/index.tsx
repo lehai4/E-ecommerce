@@ -15,13 +15,14 @@ import {
   List,
   Popover,
   Space,
+  Statistic,
   Tooltip,
   Typography,
 } from "antd";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import AndyLogo from "../logo";
 import { MenuOfMobile } from "../menu";
 
@@ -43,7 +44,7 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
     dispatcher(deleteItemCart(item));
   };
 
-  const overallPrice = useCallback(() => {
+  const overallPrice = useMemo(() => {
     return cartArr.reduce((acc, current) => {
       return acc + current.price * current.quantity;
     }, 0);
@@ -119,9 +120,14 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
                                   <Typography.Text className="text-[14px]">
                                     Quantity: {item.quantity}
                                   </Typography.Text>
-                                  <Typography.Text className="text-[14px]">
-                                    Price: &nbsp; ${item.price}
-                                  </Typography.Text>
+                                  <div className="flex flex-row items-center text-[16px] text-black">
+                                    Price: $
+                                    <Statistic
+                                      value={item.price}
+                                      precision={2}
+                                      valueStyle={{ fontSize: 16 }}
+                                    />
+                                  </div>
                                 </Space>
                               }
                             />
@@ -131,10 +137,14 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
                           direction="horizontal"
                           className="flex flex-row justify-between mt-2"
                         >
-                          <Typography.Text strong className="text-[16px]">
+                          <div className="flex flex-row items-center text-[16px] font-medium">
                             Overall Price: $
-                            <span className="underline">{overallPrice()}</span>
-                          </Typography.Text>
+                            <Statistic
+                              value={overallPrice}
+                              precision={2}
+                              valueStyle={{ fontSize: 16 }}
+                            />
+                          </div>
                           <Button
                             onClick={() => {
                               dispatcher(clearAllCart());
@@ -276,9 +286,14 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
                                   <Typography.Text className="text-[14px]">
                                     Quantity: {item.quantity}
                                   </Typography.Text>
-                                  <Typography.Text className="text-[14px]">
-                                    Price: &nbsp; ${item.price}
-                                  </Typography.Text>
+                                  <div className="flex flex-row items-center text-[16px] text-black">
+                                    Price: $
+                                    <Statistic
+                                      value={item.price}
+                                      precision={2}
+                                      valueStyle={{ fontSize: 16 }}
+                                    />
+                                  </div>
                                 </Space>
                               }
                             />
@@ -288,10 +303,14 @@ export const Header = ({ children }: { children: React.ReactNode }) => {
                           direction="horizontal"
                           className="flex flex-row justify-between mt-2"
                         >
-                          <Typography.Text strong className="text-[16px]">
+                          <div className="flex flex-row items-center text-[16px] font-medium">
                             Overall Price: $
-                            <span className="underline">{overallPrice()}</span>
-                          </Typography.Text>
+                            <Statistic
+                              value={overallPrice}
+                              precision={2}
+                              valueStyle={{ fontSize: 16 }}
+                            />
+                          </div>
                           <Button
                             onClick={() => {
                               dispatcher(clearAllCart());

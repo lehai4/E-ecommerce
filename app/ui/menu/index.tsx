@@ -47,7 +47,7 @@ export const MenuOfMobile = ({
     <Menu
       mode="inline"
       defaultSelectedKeys={[`${convertPathname(pathname)}`]}
-      style={{ background: "white", textAlign: "center" }}
+      style={{ background: "white", textAlign: "center", border: "none" }}
       items={items}
       onClick={(e) => {
         setOpen(false);

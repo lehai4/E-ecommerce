@@ -17,7 +17,11 @@ const VerifyPage = () => {
       handleVerify();
     };
   }, []);
-  return <h1 className="text-green-500 text-3xl font-semibold">{message}</h1>;
+  return (
+    <div className="text-center px-8 py-24">
+      <h1 className="text-green-500 text-3xl font-semibold">{message}</h1>
+    </div>
+  );
 };
 
 export default VerifyPage;

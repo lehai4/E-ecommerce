@@ -1,6 +1,11 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { decreaseQuantity, increaseQuantity } from "@/redux/slice/cartSlice";
+import {
+  AddAllItemCart,
+  clearAllCart,
+  decreaseQuantity,
+  increaseQuantity,
+} from "@/redux/slice/cartSlice";
 import {
   Button,
   Divider,
@@ -15,8 +20,10 @@ import {
   Image,
 } from "antd";
 import Column from "antd/es/table/Column";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { coupon } from "@/mockAPI";
+import { toast } from "react-toastify";
 interface DataType {
   key: any;
   name: string;
@@ -32,8 +39,11 @@ const Cart = () => {
   const dispatcher = useAppDispatch();
 
   const [value, setValue] = useState<string>("Free Shipping");
+  const [couponCode, setCouPonCode] = useState<string>("");
+  const [overCartArr, setOverCartArr] = useState(cartArr);
+  const [flagCode, setFlagCode] = useState<boolean>(false);
 
-  const dataSource: DataType[] = cartArr.map((cart) => {
+  const dataSource: DataType[] = overCartArr.map((cart) => {
     return {
       key: cart._id,
       image: cart.image,
@@ -50,7 +60,6 @@ const Cart = () => {
     _: DataType
   ) => {
     if (Number(value) > Number(quantity)) {
-      // increase
       console.log("increase...");
       let data = {
         _id: _.key,
@@ -58,7 +67,6 @@ const Cart = () => {
       };
       dispatcher(increaseQuantity(data));
     } else {
-      // decrease
       console.log("decrease...");
       let data = {
         _id: _.key,
@@ -68,14 +76,43 @@ const Cart = () => {
     }
   };
 
+  const handleApplyCouPon = () => {
+    const result = coupon.find((c) => c.code === couponCode);
+    if (result !== undefined) {
+      setOverCartArr(
+        overCartArr.map((item: any) => {
+          return {
+            ...item,
+            price: item.price - (item.price * Number(result?.info[0])) / 100,
+            total: item.price - (item.price * Number(result?.info[0])) / 100,
+          };
+        })
+      );
+      setFlagCode(true);
+      toast.success("Apply coupon done!");
+    } else {
+      toast.error("Invalid coupon");
+    }
+  };
+  const handleUpdateCart = () => {
+    dispatcher(AddAllItemCart(overCartArr));
+    toast.success("Update cart done!");
+  };
   const handleShipping = (e: RadioChangeEvent) => {
     setValue(e.target.value);
   };
-
+  const handlePayment = () => {
+    toast.success("Successful purchase.");
+    dispatcher(clearAllCart());
+  };
   const subTotal = useMemo(() => {
     return cartArr.reduce((acc, arr) => {
       return acc + arr.quantity * arr.price;
     }, 0);
+  }, [cartArr]);
+
+  useEffect(() => {
+    setOverCartArr(cartArr);
   }, [cartArr]);
   return (
     <div className="container">
@@ -91,7 +128,7 @@ const Cart = () => {
               width={100}
               preview={false}
             />
-            <Typography.Text strong>
+            <Typography.Text strong className="text-[16px]">
               Your shopping cart is empty
             </Typography.Text>
             <button
@@ -164,39 +201,65 @@ const Cart = () => {
                     <Statistic
                       value={total}
                       precision={2}
-                      formatter={(value: number | string) => (
-                        <>{`${value}.00`}</>
-                      )}
                       valueStyle={{ fontSize: 16 }}
                     />
                   </div>
                 )}
               />
             </Table>
+
             <Space
               direction="horizontal"
               className="flex items-center justify-between pt-[22px]"
             >
-              <div></div>
-              <Space direction="horizontal">
-                <Input
-                  placeholder="Coupon Code"
-                  size="large"
-                  className="rounded-full"
-                />
-                <Button
-                  size="large"
-                  type="primary"
-                  shape="round"
-                  className="bg-blue-600 font-semibold"
-                >
-                  Apply
-                </Button>
-                <Button size="large" shape="round" className="font-semibold">
-                  Have a Coupon?
-                </Button>
-              </Space>
+              <Button
+                shape="round"
+                size="large"
+                className="leading-normal font-semibold bg-gray-50"
+                onClick={handleUpdateCart}
+              >
+                Update
+              </Button>
+              {!flagCode ? (
+                <Space direction="horizontal">
+                  <Input
+                    placeholder="Coupon Code"
+                    size="large"
+                    className="rounded-full"
+                    value={couponCode}
+                    onChange={(e) => setCouPonCode(e.target.value)}
+                  />
+                  <Button
+                    shape="round"
+                    size="large"
+                    className="leading-normal font-semibold bg-blue-600"
+                    type="primary"
+                    onClick={handleApplyCouPon}
+                  >
+                    Apply
+                  </Button>
+                  <Button
+                    size="large"
+                    shape="round"
+                    className="leading-normal font-semibold"
+                    onClick={() => {
+                      toast.info("Giving you a 3% discount code");
+                      toast.info("Code: aws-100");
+                    }}
+                  >
+                    Have a Coupon?
+                  </Button>
+                </Space>
+              ) : (
+                <div className="text-right">
+                  <Typography.Text className="text-[16px]">
+                    You have applied the discount code is&nbsp;
+                    <span className="italic font-semibold">{couponCode}</span>
+                  </Typography.Text>
+                </div>
+              )}
             </Space>
+
             <Divider />
             <Space direction="horizontal" className="flex justify-between">
               <div></div>
@@ -237,7 +300,7 @@ const Cart = () => {
                 <Button
                   shape="round"
                   size="large"
-                  className="font-semibold bg-gray-50"
+                  className="leading-normal font-semibold bg-gray-50"
                   onClick={() => {
                     router.push("/product");
                   }}
@@ -247,13 +310,11 @@ const Cart = () => {
                 <Button
                   shape="round"
                   size="large"
-                  className="font-semibold bg-blue-600"
+                  className="leading-normal font-semibold bg-blue-600"
                   type="primary"
-                  onClick={() => {
-                    router.push(`/cart/checkout`);
-                  }}
+                  onClick={handlePayment}
                 >
-                  Process To Checkout
+                  Payment
                 </Button>
               </Space>
             </Space>

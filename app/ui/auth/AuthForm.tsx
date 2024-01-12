@@ -4,7 +4,6 @@ import { signUpWithCredentials } from "@/lib/actions";
 import { Button, Checkbox, Form, Input } from "antd";
 import { GoogleOutlined } from "@ant-design/icons";
 import { signIn } from "next-auth/react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { toast } from "react-toastify";
 const AuthForm = () => {

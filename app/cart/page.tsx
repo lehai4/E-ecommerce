@@ -1,7 +1,5 @@
-import { Suspense } from "react";
 import BannerPage from "../ui/bannerPage";
 import Cart from "../ui/cart";
-import Loading from "../(overview)/loading";
 
 const CartPage = async () => {
   return (
@@ -9,9 +7,7 @@ const CartPage = async () => {
       <BannerPage title="Shopping Cart" />
 
       {/* Cart of Us */}
-      <Suspense fallback={<Loading />}>
-        <Cart />
-      </Suspense>
+      <Cart />
     </div>
   );
 };

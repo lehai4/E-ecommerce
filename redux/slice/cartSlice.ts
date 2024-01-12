@@ -25,8 +25,11 @@ export const cartSlice = createSlice({
       state.cartArr = [];
       state.numberCart = 0;
     },
+    AddAllItemCart: (state, action: PayloadAction<TypeProduct[]>) => {
+      state.cartArr = action.payload;
+      state.numberCart = action.payload.length;
+    },
     AddToCart: (state, action: PayloadAction<TypeProduct>) => {
-      console.log(action.payload);
       if (state.numberCart === 0) {
         state.cartArr.push(action.payload);
       } else {
@@ -83,6 +86,7 @@ export const cartSlice = createSlice({
 });
 
 export const {
+  AddAllItemCart,
   AddToCart,
   deleteItemCart,
   getCart,

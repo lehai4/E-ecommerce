@@ -4,8 +4,6 @@ import BannerPage from "@/app/ui/bannerPage";
 import Intro from "@/app/ui/intro";
 import ProductDetail from "@/app/ui/product/productDetail";
 import ProductView from "../page";
-import { randomProduct } from "@/lib/utils/randomProduct";
-import { getProducts } from "@/lib/utils/getSliceProduct";
 import { ProductViewsSkeleton } from "@/app/ui/skeleton";
 import { Suspense } from "react";
 
