@@ -1,4 +1,4 @@
-import { getAllCategory } from "@/app/api/product/route";
+import { getAllCategory, getAllProduct } from "@/app/api/product/route";
 import { TypeCategory, TypeProduct } from "@/interface";
 import { convertPathname } from "@/lib/utils/convertPathname";
 import { getProducts } from "@/lib/utils/getSliceProduct";
@@ -10,28 +10,14 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-const getAllProduct = async () => {
-  try {
-    const res = await fetch("http://localhost:3000/api/product/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch products");
-    }
-    return res.json();
-  } catch (e) {
-    console.log(e);
-  }
-};
 const ProductView = async ({
   countShowProduct,
 }: {
   countShowProduct: number;
 }) => {
-  const { products } = await getAllProduct();
+  const products: TypeProduct[] = await JSON.parse(
+    JSON.stringify(await getAllProduct())
+  );
   const category: TypeCategory[] = await JSON.parse(
     JSON.stringify(await getAllCategory())
   );

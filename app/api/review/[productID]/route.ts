@@ -12,5 +12,6 @@ export async function GET(
   const { productID } = params;
   await connect();
   const reviews = await Review.find({ productID });
-  return Response.json({ reviews }, { status: 200 });
+
+  return Response.json(reviews, { status: 200 });
 }

@@ -1,5 +1,6 @@
+import { getAllProduct } from "@/app/api/product/route";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { TypeCategory } from "@/interface";
+import { TypeCategory, TypeProduct } from "@/interface";
 import { convertPathname } from "@/lib/utils/convertPathname";
 import { AddToCart } from "@/redux/slice/cartSlice";
 import { AddToWishList } from "@/redux/slice/wishListSlice";
@@ -10,24 +11,6 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { toast } from "react-toastify";
-
-const getAllProduct = async () => {
-  try {
-    const res = await fetch("http://localhost:3000/api/product", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: "force-cache",
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch products");
-    }
-    return res.json();
-  } catch (e) {
-    console.log(e);
-  }
-};
 
 const getProductByCategory = async (catelog: string, type: string) => {
   try {
@@ -118,7 +101,11 @@ async function ProductByCategory({
 }) {
   const dispath = useAppDispatch();
   const wishListArrr = useAppSelector((state) => state.wishList.wishListArr);
-  const { products } = await getAllProduct();
+
+  const products: TypeProduct[] = await JSON.parse(
+    JSON.stringify(await getAllProduct())
+  );
+
   const productArr =
     catelog !== ""
       ? await getProductByCategory(catelog, "getProductByCategory")

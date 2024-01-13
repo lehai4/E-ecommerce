@@ -8,20 +8,13 @@ import Categories from "@/models/Category";
 import Product from "@/models/Product";
 import { redirect } from "next/navigation";
 
-//GET
-export async function GET() {
-  // getAllProduct
-  try {
-    await connect();
+export async function getAllProduct() {
+  await connect();
+  const products: TypeProduct[] = await Product.find();
 
-    const products = await Product.find();
-
-    return Response.json({ products });
-  } catch (e) {
-    console.log(e);
-  }
+  if (products.length < 0) throw new Error("Product not found");
+  return products;
 }
-
 //POST
 export async function POST(req: Request, res: Response) {
   const { type, ...rest } = await req.json();

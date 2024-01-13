@@ -28,8 +28,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   const category = await JSON.parse(JSON.stringify(await getAllCategory()));
 
-  const { reviews } = await getReviewsByIdProduct(product._id);
-
+  const reviews = await getReviewsByIdProduct(product._id);
   return (
     <div className="main-content">
       <BannerPage title=" Product Detail" breacrumb="" />
