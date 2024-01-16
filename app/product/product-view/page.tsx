@@ -1,8 +1,6 @@
 import { getAllCategory } from "@/app/api/product/route";
 import ProductUIView from "@/app/ui/product/product-view";
-import { ProductViewsSkeleton } from "@/app/ui/skeleton";
-import { TypeCategory } from "@/interface";
-import { Suspense } from "react";
+import { TypeCategory, TypeProduct } from "@/interface";
 
 const getDataProducts = async () => {
   try {
@@ -27,19 +25,17 @@ const ProductView = async ({
 }: {
   countShowProduct: number;
 }) => {
-  const products = await getDataProducts();
+  const products: TypeProduct[] = await getDataProducts();
   const category: TypeCategory[] = await JSON.parse(
     JSON.stringify(await getAllCategory())
   );
 
   return (
-    <Suspense fallback={<ProductViewsSkeleton />}>
-      <ProductUIView
-        products={products}
-        category={category}
-        countShowProduct={countShowProduct}
-      />
-    </Suspense>
+    <ProductUIView
+      products={products}
+      category={category}
+      countShowProduct={countShowProduct}
+    />
   );
 };
 

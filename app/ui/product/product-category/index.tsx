@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { TypeCategory } from "@/interface";
+import { TypeCategory, TypeProduct } from "@/interface";
 import { convertPathname } from "@/lib/utils/convertPathname";
 import { AddToCart } from "@/redux/slice/cartSlice";
 import { AddToWishList } from "@/redux/slice/wishListSlice";
@@ -116,11 +116,13 @@ async function ProductByCategory({
   rangePrice: number[];
 }) {
   const dispath = useAppDispatch();
-  const wishListArrr = useAppSelector((state) => state.wishList.wishListArr);
+  const wishListArrr: TypeProduct[] = useAppSelector(
+    (state) => state.wishList.wishListArr
+  );
 
-  const data = await getProducts();
+  const data: TypeProduct[] = await getProducts();
 
-  const productArr =
+  const productArr: TypeProduct[] =
     catelog !== ""
       ? await getProductByCategory(catelog, "getProductByCategory")
       : catelog === "" && search !== "" && sortValue === "Default sorting"
@@ -134,8 +136,8 @@ async function ProductByCategory({
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 -mx-[15px]`}
       >
-        {productArr?.length > 0 ? (
-          productArr?.map((product: any, i: number) => (
+        {productArr.length > 0 ? (
+          productArr.map((product: any, i: number) => (
             <div key={i} className="px-[15px] w-full card-product mb-[30px]">
               <div className="card-product__img">
                 <img
@@ -195,7 +197,7 @@ async function ProductByCategory({
               </div>
               <div className="card-body p-[20px]">
                 <div className="flex flex-col justify-center items-center">
-                  {category?.map((cate, i) => {
+                  {category.map((cate, i) => {
                     if (cate._id === product.categoryID) {
                       return (
                         <span key={i} className="text-[15px] font-normal">

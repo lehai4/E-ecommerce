@@ -7,6 +7,7 @@ import { ProductViewsSkeleton } from "../ui/skeleton";
 import ProductView from "./product-view/page";
 import Intro from "../ui/intro";
 import Subscribe from "../ui/subscribe";
+import { TypeCategory } from "@/interface";
 
 async function Product({
   searchParams,
@@ -19,7 +20,9 @@ async function Product({
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
 
-  const category = await JSON.parse(JSON.stringify(await getAllCategory()));
+  const category: TypeCategory[] = await JSON.parse(
+    JSON.stringify(await getAllCategory())
+  );
 
   return (
     <div className="main-content">

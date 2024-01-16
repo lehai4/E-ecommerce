@@ -6,6 +6,7 @@ import ProductDetail from "@/app/ui/product/productDetail";
 import ProductView from "../page";
 import { ProductViewsSkeleton } from "@/app/ui/skeleton";
 import { Suspense } from "react";
+import { TypeCategory, TypeProduct, TypeReview } from "@/interface";
 
 const getReviewsByIdProduct = async (id: string) => {
   try {
@@ -22,13 +23,17 @@ const getReviewsByIdProduct = async (id: string) => {
 };
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const product = await JSON.parse(
+  const product: TypeProduct = await JSON.parse(
     JSON.stringify(await getProductByName(params.slug))
   );
 
-  const category = await JSON.parse(JSON.stringify(await getAllCategory()));
+  const category: TypeCategory[] = await JSON.parse(
+    JSON.stringify(await getAllCategory())
+  );
 
-  const reviews = await getReviewsByIdProduct(product._id);
+  const reviews: TypeReview[] = await getReviewsByIdProduct(
+    product._id.toString()
+  );
   return (
     <div className="main-content">
       <BannerPage title=" Product Detail" breacrumb="" />

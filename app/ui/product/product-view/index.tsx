@@ -34,7 +34,7 @@ const ProductUIView = ({
   return (
     <div className="container">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 -mx-[15px]">
-        {getProducts(countShowProduct, products)?.map(
+        {getProducts(countShowProduct, products).map(
           (product: TypeProduct, i: number) => (
             <div key={i} className="px-[15px] w-full card-product mb-[30px]">
               <div className="card-product__img">
@@ -101,7 +101,7 @@ const ProductUIView = ({
               </div>
               <div className="card-body p-[20px]">
                 <div className="flex flex-col justify-center items-center">
-                  {category?.map((cate, i) => {
+                  {category.map((cate, i) => {
                     if (cate._id === product.categoryID) {
                       return (
                         <span key={i} className="text-[15px] font-normal">
