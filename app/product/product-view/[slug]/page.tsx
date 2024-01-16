@@ -7,10 +7,11 @@ import ProductView from "../page";
 import { ProductViewsSkeleton } from "@/app/ui/skeleton";
 import { Suspense } from "react";
 import { TypeCategory, TypeProduct, TypeReview } from "@/interface";
+import { API_URL } from "@/config";
 
 const getReviewsByIdProduct = async (id: string) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/review/${id}`, {
+    const res = await fetch(`${API_URL}/api/review/${id}`, {
       cache: "no-store",
     });
     if (!res.ok) {
