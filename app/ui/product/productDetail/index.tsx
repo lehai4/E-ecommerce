@@ -150,7 +150,7 @@ const ProductDetail = ({
                 <Typography.Text className="text-base font-[400]">
                   Category:
                 </Typography.Text>
-                {category.map((cate, i) => {
+                {category?.map((cate, i) => {
                   if (cate._id === product.categoryID) {
                     return (
                       <Typography.Text

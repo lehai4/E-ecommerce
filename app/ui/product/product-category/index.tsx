@@ -109,7 +109,7 @@ async function ProductByCategory({
   sortValue,
   rangePrice,
 }: {
-  category?: TypeCategory[];
+  category: TypeCategory[];
   catelog: string;
   search: string;
   sortValue: string;
@@ -135,7 +135,7 @@ async function ProductByCategory({
         className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 -mx-[15px]`}
       >
         {productArr?.length > 0 ? (
-          productArr.map((product: any, i: number) => (
+          productArr?.map((product: any, i: number) => (
             <div key={i} className="px-[15px] w-full card-product mb-[30px]">
               <div className="card-product__img">
                 <img

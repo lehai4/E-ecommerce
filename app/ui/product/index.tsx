@@ -87,7 +87,7 @@ const ProductIndex = ({
             <div className="px-8 py-5 bg-gray-100">
               <Radio.Group onChange={handleCategoryChange} value={catelog}>
                 <Space direction="vertical">
-                  {category.map((cate, i) => (
+                  {category?.map((cate, i) => (
                     <Radio
                       value={cate.catelog}
                       key={i}
