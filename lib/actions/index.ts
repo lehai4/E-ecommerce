@@ -6,8 +6,8 @@ import { connect } from "../utils/database";
 import { generateToken, verifyToken } from "../utils/token";
 import { FieldType } from "@/interface";
 import sendEmail from "../utils/sendEmail";
+import { NEXT_URL } from "@/config/index";
 
-const BASE_URL = process.env.NEXTAUTH_URL;
 export async function signUpWithCredentials(data: FieldType) {
   try {
     await connect();
@@ -20,7 +20,7 @@ export async function signUpWithCredentials(data: FieldType) {
     const token = generateToken({ user: data });
     await sendEmail({
       to: data.email,
-      url: `${BASE_URL}/verify?token=${token}`,
+      url: `${NEXT_URL}/verify?token=${token}`,
       text: "Verify Email",
     });
 

@@ -10,10 +10,10 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { toast } from "react-toastify";
-
+import { API_URL } from "@/config";
 const getProducts = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/product", {
+    const res = await fetch(`${API_URL}/api/product`, {
       method: "GET", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "content-Type": "application/json",
@@ -30,7 +30,7 @@ const getProducts = async () => {
 };
 const getProductByCategory = async (catelog: string, type: string) => {
   try {
-    const res = await fetch("http://localhost:3000/api/product", {
+    const res = await fetch(`${API_URL}/api/product`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       body: JSON.stringify({ catelog, type }), // body data type must match "Content-Type" header
       headers: {
@@ -49,7 +49,7 @@ const getProductByCategory = async (catelog: string, type: string) => {
 
 const getProductByPrice = async (rangePrice: number[], type: string) => {
   try {
-    const res = await fetch("http://localhost:3000/api/product", {
+    const res = await fetch(`${API_URL}/api/product`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       body: JSON.stringify({ rangePrice, type }), // body data type must match "Content-Type" header
       headers: {
@@ -67,7 +67,7 @@ const getProductByPrice = async (rangePrice: number[], type: string) => {
 
 const getProductBySearch = async (search: string, type: string) => {
   try {
-    const res = await fetch("http://localhost:3000/api/product", {
+    const res = await fetch(`${API_URL}/api/product`, {
       method: "POST",
       body: JSON.stringify({ search, type }),
       headers: {
@@ -85,7 +85,7 @@ const getProductBySearch = async (search: string, type: string) => {
 };
 const getProductBySort = async (sortValue: string, type: string) => {
   try {
-    const res = await fetch("http://localhost:3000/api/product", {
+    const res = await fetch(`${API_URL}/api/product`, {
       method: "POST",
       body: JSON.stringify({ sortValue, type }),
       headers: {

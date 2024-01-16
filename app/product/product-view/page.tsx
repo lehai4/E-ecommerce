@@ -1,10 +1,10 @@
 import { getAllCategory } from "@/app/api/product/route";
 import ProductUIView from "@/app/ui/product/product-view";
 import { TypeCategory, TypeProduct } from "@/interface";
-
+import { API_URL } from "@/config";
 const getDataProducts = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/product", {
+    const res = await fetch(`${API_URL}/api/product`, {
       method: "GET", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "content-Type": "application/json",
