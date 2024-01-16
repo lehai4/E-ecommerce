@@ -79,18 +79,17 @@ const WishList = () => {
                 icon={<CloseOutlined />}
                 onClick={() => {
                   dispatcher(deleteItemWishList(product));
-                  toast.success("Delete WishList successfully!");
+                  toast.success("Delete WishList Successfully!");
                 }}
               />
             )}
           />
         </Table>
-        <Divider />
-        <div className="text-center">
+        <div className="text-center mt-5">
           <Button
             onClick={() => {
               dispatcher(clearAllWishList());
-              toast.success("Clear All WishList successfully!");
+              toast.success("Clear All WishList Successfully!");
             }}
           >
             Clear All

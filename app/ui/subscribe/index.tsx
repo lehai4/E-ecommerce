@@ -23,7 +23,6 @@ const Subscribe = () => {
             </label>
             <Input
               size="large"
-              bordered
               className="rounded-full w-full sm:w-4/12 md:w-4/12 lg:w-4/12 py-[12px]"
               placeholder="Your email address"
               value={value}

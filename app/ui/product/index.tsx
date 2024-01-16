@@ -10,13 +10,13 @@ import {
   Space,
   Typography,
 } from "antd";
-import React, { Suspense, useEffect, useState } from "react";
-import { CategorysSkeleton } from "../skeleton";
-import ProductByCategory from "./product-category";
+import { Suspense, useEffect, useState } from "react";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import Search from "../search";
+import { CategorysSkeleton } from "../skeleton";
+import ProductByCategory from "./product-category";
 
 type SortType = {
   value: string;
@@ -105,7 +105,6 @@ const ProductIndex = ({
             <Typography.Text className="font-semibold text-[18px]">
               Price
             </Typography.Text>
-            {/* Slider */}
             <Slider
               min={1}
               max={10000}
@@ -167,4 +166,4 @@ const ProductIndex = ({
   );
 };
 
-export default React.memo(ProductIndex);
+export default ProductIndex;

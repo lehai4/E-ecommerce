@@ -1,5 +1,6 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/hooks";
+import { coupon } from "@/mockAPI";
 import {
   AddAllItemCart,
   clearAllCart,
@@ -9,6 +10,7 @@ import {
 import {
   Button,
   Divider,
+  Image,
   Input,
   InputNumber,
   Radio,
@@ -17,12 +19,11 @@ import {
   Statistic,
   Table,
   Typography,
-  Image,
 } from "antd";
 import Column from "antd/es/table/Column";
-import { useEffect, useMemo, useState } from "react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { coupon } from "@/mockAPI";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 interface DataType {
   key: any;
@@ -34,6 +35,7 @@ interface DataType {
 }
 
 const Cart = () => {
+  const { data: session } = useSession();
   const cartArr = useAppSelector((state) => state.cart.cartArr);
   const router = useRouter();
   const dispatcher = useAppDispatch();
@@ -102,8 +104,13 @@ const Cart = () => {
     setValue(e.target.value);
   };
   const handlePayment = () => {
-    toast.success("Successful purchase.");
-    dispatcher(clearAllCart());
+    if (session?.user === undefined) {
+      toast.info("Please login for purchase");
+      router.push("/auth/signin");
+    } else {
+      toast.success("Successful purchase.");
+      dispatcher(clearAllCart());
+    }
   };
   const subTotal = useMemo(() => {
     return cartArr.reduce((acc, arr) => {

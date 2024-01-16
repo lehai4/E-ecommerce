@@ -1,11 +1,12 @@
 "use client";
 
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { TypeCategory, TypeProduct, TypeReview } from "@/interface";
 import { convertPathname } from "@/lib/utils/convertPathname";
 import { getReviewMore } from "@/lib/utils/getSliceProduct";
 import { commentTab } from "@/mockAPI";
 import { AddToCart } from "@/redux/slice/cartSlice";
+import { AddToWishList } from "@/redux/slice/wishListSlice";
 import { SketchOutlined, HeartOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -46,6 +47,7 @@ const ProductDetail = ({
 }) => {
   const router = useRouter();
   const dispatcher = useAppDispatch();
+  const wishListArrr = useAppSelector((state) => state.wishList.wishListArr);
   const { data: session } = useSession();
 
   const [form] = Form.useForm();
@@ -94,13 +96,18 @@ const ProductDetail = ({
     setQuantity(value);
   };
   const handleAddToCart = () => {
-    let customProduct = {
-      ...product,
-      quantity: quantity ?? 1,
-      total: Number(quantity) * product.price,
-    };
-    dispatcher(AddToCart(customProduct));
-    toast.success("Add To Cart Done!");
+    if (session?.user === undefined) {
+      toast.info("Please login account");
+      router.push("/auth/signin");
+    } else {
+      let customProduct = {
+        ...product,
+        quantity: quantity ?? 1,
+        total: Number(quantity) * product.price,
+      };
+      dispatcher(AddToCart(customProduct));
+      toast.success("Add To Cart Done!");
+    }
   };
   // convert ObjectKey for Specification
   const objectKeys = Object.keys(product.specification);
@@ -206,13 +213,27 @@ const ProductDetail = ({
                 className="flex items-center justify-center bg-gray-100"
                 size="large"
               />
-              <Link href={`/whitelist/${convertPathname(product.name)}`}>
-                <Button
-                  icon={<HeartOutlined />}
-                  className="flex items-center justify-center bg-gray-100"
-                  size="large"
-                />
-              </Link>
+              <Button
+                icon={<HeartOutlined />}
+                className="flex items-center justify-center bg-gray-100"
+                size="large"
+                onClick={() => {
+                  let flag = true;
+                  wishListArrr.filter((item) => {
+                    if (item._id === product._id) {
+                      flag = false;
+                    } else if (item._id !== product._id) {
+                      flag = true;
+                    }
+                  });
+                  flag === true
+                    ? dispatcher(AddToWishList(product)) &&
+                      toast.success("Add WishList successfully!")
+                    : toast.error(
+                        "Add WishList Failed!. The product already exists in the wishlist"
+                      );
+                }}
+              />
             </Space>
           </div>
         </div>

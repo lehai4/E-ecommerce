@@ -1,6 +1,6 @@
 import { TypeProduct, TypeReview } from "@/interface";
 
-export const getProducts = (count: number, data: TypeProduct[]) => {
+export const getProducts = (count: number, data: any[]) => {
   const max = data.length - count;
   const min = 0;
   const start = Math.floor(Math.random() * (max - min) + min);
