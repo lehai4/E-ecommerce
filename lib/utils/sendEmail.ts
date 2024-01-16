@@ -21,7 +21,7 @@ const sendEmail = async ({
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: to,
-    subject: "NextJS-CMS of LeChiHai",
+    subject: "Ecommerce of LeChiHai",
     html: html({ url, text }),
   };
   const result = await transporter.sendMail(mailOptions);

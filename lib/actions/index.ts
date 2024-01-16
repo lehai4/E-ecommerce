@@ -35,14 +35,15 @@ export async function signUpWithCredentials(data: FieldType) {
 export async function verifyEmailWithCredentials(token: any) {
   try {
     const checkToken: any = await verifyToken(token);
-    const { user } = checkToken;
-    const useExist = await User.findOne({ email: user.email });
 
-    if (useExist) {
-      return {
-        msg: "Verify Success!",
-      };
-    }
+    const { user } = checkToken;
+    // const useExist = await User.findOne({ email: user.email });
+
+    // if (useExist) {
+    //   return {
+    //     msg: "Verify Success!",
+    //   };
+    // }
     await new User(user).save();
     return {
       msg: "Verify Success",
