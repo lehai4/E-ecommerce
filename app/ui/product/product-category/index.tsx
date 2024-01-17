@@ -125,9 +125,7 @@ async function ProductByCategory({
   const productArr: TypeProduct[] =
     catelog !== ""
       ? await getProductByCategory(catelog, "getProductByCategory")
-      : catelog === "" && search !== "" && sortValue === "Default sorting"
-      ? await getProductBySearch(search, "getProductBySearch")
-      : catelog === "" && search === "" && sortValue !== "Default sorting"
+      : catelog === "" && sortValue !== "Default sorting"
       ? await getProductBySort(sortValue, "getProductBySort")
       : data;
 

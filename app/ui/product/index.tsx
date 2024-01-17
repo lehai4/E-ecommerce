@@ -12,11 +12,12 @@ import {
 } from "antd";
 import { Suspense, useEffect, useState } from "react";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useDebouncedCallback } from "use-debounce";
-import Search from "../search";
+// import { usePathname, useRouter, useSearchParams } from "next/navigation";
+// import { useDebouncedCallback } from "use-debounce";
+// import Search from "../search";
 import { CategorysSkeleton } from "../skeleton";
 import ProductByCategory from "./product-category";
+import { toast } from "react-toastify";
 
 type SortType = {
   value: string;
@@ -38,9 +39,9 @@ const ProductIndex = ({
   query: string;
   currentPage: number;
 }) => {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  // const searchParams = useSearchParams();
+  // const pathname = usePathname();
+  // const { replace } = useRouter();
 
   const [catelog, setCatelog] = useState<string>("");
   const [sortValue, setSortValue] = useState("Default sorting");
@@ -59,17 +60,17 @@ const ProductIndex = ({
     setRangePrice([1, 10000]);
   };
 
-  const handleSearch = useDebouncedCallback((search: string) => {
-    const params = new URLSearchParams(searchParams);
+  // const handleSearch = useDebouncedCallback((search: string) => {
+  //   const params = new URLSearchParams(searchParams);
 
-    params.set("page", "1");
-    if (search) {
-      params.set("query", search);
-    } else {
-      params.delete("query");
-    }
-    replace(`${pathname}?${params.toString()}`);
-  }, 500);
+  //   params.set("page", "1");
+  //   if (search) {
+  //     params.set("query", search);
+  //   } else {
+  //     params.delete("query");
+  //   }
+  //   replace(`${pathname}?${params.toString()}`);
+  // }, 300);
 
   useEffect(() => {
     window.scrollTo(0, 410);
@@ -113,6 +114,7 @@ const ProductIndex = ({
               defaultValue={[1, 10000]}
               value={rangePrice.map((range) => range)}
               onChange={(e) => {
+                toast.info("Temporary close function");
                 setRangePrice(e);
               }}
             />
@@ -143,10 +145,10 @@ const ProductIndex = ({
                     defaultValue={"Default sorting"}
                   />
                 </Space>
-                <Search
+                {/* <Search
                   placeholder="Search product..."
                   handleSearch={handleSearch}
-                />
+                /> */}
               </Space>
             </div>
           </div>

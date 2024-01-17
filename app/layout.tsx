@@ -11,6 +11,11 @@ import FooterPage from "./ui/footer";
 import { Header } from "./ui/header";
 import MenuPage from "./ui/menu";
 
+<meta
+  name="format-detection"
+  content="telephone=no, date=no, email=no, address=no"
+/>;
+
 export default function RootLayout({
   children,
 }: {

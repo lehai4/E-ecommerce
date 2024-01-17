@@ -32,6 +32,8 @@ const items: MenuItem[] = [
   getItem("Product", "/product"),
   getItem("Blog", "/blog"),
   getItem("Contact", "/contact"),
+  getItem("WishList", "/wish-list"),
+  getItem("Cart", "/cart"),
 ];
 
 export const MenuOfMobile = ({
