@@ -4,15 +4,18 @@ import News from "@/app/ui/news";
 import Subscribe from "@/app/ui/subscribe";
 import { TypeCategory } from "@/interface";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { getAllCategory } from "../api/product/route";
-import ProductView from "../product/product-view/page";
 import BannerContent from "../ui/bannerContent";
 import BannerOffer from "../ui/bannerOffer";
 import { CatelogView } from "../ui/catelog";
 import Policy from "../ui/policy";
 import { ProductViewsSkeleton } from "../ui/skeleton";
 
+const NoSSRProductView = dynamic(() => import("../product/product-view/page"), {
+  ssr: false,
+});
 export const metadata: Metadata = {
   title: {
     template: "%s | Ecommerce",
@@ -20,7 +23,8 @@ export const metadata: Metadata = {
   },
   description: "Ecommerce of LeChiHai",
 };
-const Page = async () => {
+
+async function Page() {
   const category: TypeCategory[] = await JSON.parse(
     JSON.stringify(await getAllCategory())
   );
@@ -42,11 +46,12 @@ const Page = async () => {
           des="Popular Item in the market"
         />
       </Section>
-      <Section className="section-product mb-[70px]">
+      <Section className="section-product__seller mb-[70px]">
         <Suspense fallback={<ProductViewsSkeleton />}>
-          <ProductView countShowProduct={8} />
+          <NoSSRProductView countShowProduct={8} />
         </Suspense>
       </Section>
+      {/*  */}
       <Section className="section-banner section-parallax">
         <BannerOffer />
       </Section>
@@ -59,7 +64,7 @@ const Page = async () => {
       </Section>
       <Section className="section-product__seller mb-[70px]">
         <Suspense fallback={<ProductViewsSkeleton />}>
-          <ProductView countShowProduct={4} />
+          <NoSSRProductView countShowProduct={4} />
         </Suspense>
       </Section>
       <Section className="section-title mt-[120px]">
@@ -77,5 +82,5 @@ const Page = async () => {
       </Section>
     </>
   );
-};
+}
 export default Page;

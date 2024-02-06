@@ -31,13 +31,11 @@ const ProductView = async ({
   );
 
   return (
-    <div>
-      <ProductUIView
-        products={products}
-        category={category}
-        countShowProduct={countShowProduct}
-      />
-    </div>
+    <ProductUIView
+      products={products}
+      category={category}
+      countShowProduct={countShowProduct}
+    />
   );
 };
 
