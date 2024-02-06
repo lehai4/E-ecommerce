@@ -9,7 +9,7 @@ const VerifyPage = () => {
   const [message, setMessage] = useState<string>("");
 
   const handleVerify = async () => {
-    const res = await verifyEmailWithCredentials(token);
+    const res = await verifyEmailWithCredentials(token as string);
     setMessage(res?.msg);
   };
   useEffect(() => {

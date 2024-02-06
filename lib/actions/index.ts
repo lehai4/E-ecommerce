@@ -7,6 +7,7 @@ import { generateToken, verifyToken } from "../utils/token";
 import { FieldType } from "@/interface";
 import sendEmail from "../utils/sendEmail";
 import { NEXT_URL } from "@/config/index";
+import { JwtPayload } from "jsonwebtoken";
 
 export async function signUpWithCredentials(data: FieldType) {
   try {
@@ -32,18 +33,16 @@ export async function signUpWithCredentials(data: FieldType) {
   }
 }
 
-export async function verifyEmailWithCredentials(token: any) {
+export async function verifyEmailWithCredentials(token: string) {
   try {
-    const checkToken: any = await verifyToken(token);
+    // console.log({ token });
+
+    const checkToken: JwtPayload = await verifyToken(token);
+
+    // console.log({ checkToken });
 
     const { user } = checkToken;
-    // const useExist = await User.findOne({ email: user.email });
 
-    // if (useExist) {
-    //   return {
-    //     msg: "Verify Success!",
-    //   };
-    // }
     await new User(user).save();
     return {
       msg: "Verify Success",
