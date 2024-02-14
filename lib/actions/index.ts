@@ -30,7 +30,7 @@ export async function signUpWithCredentials(data: FieldType) {
 
     if (!checkToken) return { msg: "No Sign Up!. Becasue token no match!" };
     else {
-      // await new User(checkToken.user).save();
+      await new User(checkToken.user).save();
 
       return {
         msg: "Sign Up Success!",
