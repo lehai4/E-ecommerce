@@ -19,15 +19,27 @@ export async function signUpWithCredentials(data: FieldType) {
     }
 
     const token = generateToken({ user: data });
-    await sendEmail({
-      to: data.email,
-      url: `${NEXT_URL}/verify?token=${token}`,
-      text: "Verify Email",
-    });
 
-    return {
-      msg: "Sign Up Success!.Check your email address to complete the registration",
-    };
+    // await sendEmail({
+    //   to: data.email,
+    //   url: `${NEXT_URL}/verify?token=${token}`,
+    //   text: "Verify Email",
+    // });
+
+    const checkToken: JwtPayload = await verifyToken(token);
+
+    if (!checkToken) return { msg: "No Sign Up!. Becasue token no match!" };
+    else {
+      // await new User(checkToken.user).save();
+
+      return {
+        msg: "Sign Up Success!",
+      };
+    }
+
+    // return {
+    //   msg: "Sign Up Success!.Check your email address to complete the registration",
+    // };
   } catch (err) {
     redirect(`/errors?error=${err}`);
   }
@@ -35,11 +47,7 @@ export async function signUpWithCredentials(data: FieldType) {
 
 export async function verifyEmailWithCredentials(token: string) {
   try {
-    // console.log({ token });
-
     const checkToken: JwtPayload = await verifyToken(token);
-
-    // console.log({ checkToken });
 
     const { user } = checkToken;
 

@@ -4,11 +4,11 @@ import { signUpWithCredentials } from "@/lib/actions";
 import { Button, Checkbox, Form, Input } from "antd";
 import { GoogleOutlined } from "@ant-design/icons";
 import { signIn } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 const AuthForm = () => {
   const pathname = usePathname();
-
+  const router = useRouter();
   const handleLogin = async (values: FieldType) => {
     const { email, password } = values;
     await signIn("credentials", {
@@ -27,6 +27,7 @@ const AuthForm = () => {
     });
     if (res?.msg) {
       toast.success(res.msg);
+      router.push("/auth/signin");
     } else {
       toast.error(res.msg);
     }

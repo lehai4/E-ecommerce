@@ -50,7 +50,7 @@ export const CatelogView = ({ category }: { category: TypeCategory[] }) => (
             />
 
             <Link
-              href={`/category/${convertPathname(cate.catelog)}`}
+              href={`#/category/${convertPathname(cate.catelog)}`}
               className="card-catelog__imgOverlay"
             >
               <div className="relative before:absolute hover:before:w-full before:w-0 before:h-[1px] before:bg-slate-50 before:bottom-0 before:transition-all before:duration-150 before:ease-in">
