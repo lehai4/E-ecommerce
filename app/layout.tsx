@@ -1,6 +1,6 @@
 "use client";
 import ContextProvider from "@/context/provider";
-import { store } from "@/redux/store/store";
+import { permistor, store } from "@/redux/store/store";
 import { Content } from "antd/es/layout/layout";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -10,6 +10,7 @@ import { oswald } from "./ui/fonts";
 import FooterPage from "./ui/footer";
 import { Header } from "./ui/header";
 import MenuPage from "./ui/menu";
+import { PersistGate } from "redux-persist/integration/react";
 
 <meta
   name="format-detection"
@@ -25,13 +26,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={oswald.className}>
         <Provider store={store}>
-          <ContextProvider>
-            <Header>
-              <MenuPage />
-            </Header>
-            <Content>{children}</Content>
-            <FooterPage />
-          </ContextProvider>
+          <PersistGate loading={null} persistor={permistor}>
+            <ContextProvider>
+              <Header>
+                <MenuPage />
+              </Header>
+              <Content>{children}</Content>
+              <FooterPage />
+            </ContextProvider>
+          </PersistGate>
         </Provider>
         <ToastContainer
           position="top-right"
